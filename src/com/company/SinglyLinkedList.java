@@ -22,10 +22,12 @@ class SinglyLinkedListIterator<E> implements Iterator {
     this.curr = collection.indexNode(0);
   }
 
+  @Override
   public boolean hasNext() {
     return curr != null;
   }
 
+  @Override
   public E next() {
     SinglyLinkedNode<E> oldCurr = curr;
     curr = curr.next;
@@ -142,10 +144,12 @@ public class SinglyLinkedList<E> implements Iterable {
     return remove(0);
   }
 
+  @Override
   public Iterator<E> iterator() {
     return (Iterator<E>)new SinglyLinkedListIterator<E>(this);
   }
 
+  @Override
   public SinglyLinkedList<E> clone() {
     if (len == 0) {
       return new SinglyLinkedList<>();
@@ -187,6 +191,7 @@ public class SinglyLinkedList<E> implements Iterable {
     return len == 0;
   }
 
+  @Override
   public String toString() {
     String readable = "SinglyLinkedList { ";
 
