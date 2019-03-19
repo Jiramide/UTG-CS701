@@ -14,7 +14,7 @@ class SinglyLinkedNode<E> {
 
 }
 
-class SinglyLinkedListIterator<E> implements Iterator {
+class SinglyLinkedListIterator<E> implements Iterator<E> {
 
   private SinglyLinkedNode<E> curr;
 
@@ -37,7 +37,7 @@ class SinglyLinkedListIterator<E> implements Iterator {
 
 }
 
-public class SinglyLinkedList<E> implements Iterable {
+public class SinglyLinkedList<E> implements Iterable<E> {
 
   private SinglyLinkedNode<E> head;
   private int len;
