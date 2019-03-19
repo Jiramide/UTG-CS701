@@ -1,12 +1,15 @@
+package com.company;
+
 import java.util.Iterator;
+import java.lang.Iterable;
 
 class SinglyLinkedNode<E> {
 
   SinglyLinkedNode<E> next;
   E val;
 
-  SinglyLinkedNode(E _val) {
-    val = _val;
+  SinglyLinkedNode(E val) {
+    this.val = val;
   }
 
 }
@@ -15,8 +18,8 @@ class SinglyLinkedListIterator<E> implements Iterator {
 
   private SinglyLinkedNode<E> curr;
 
-  SinglyLinkedListIterator(SinglyLinkedNode<E> start) {
-    curr = start;
+  SinglyLinkedListIterator(SinglyLinkedList<E> collection) {
+    this.curr = collection.indexNode(0);
   }
 
   public boolean hasNext() {
@@ -29,19 +32,20 @@ class SinglyLinkedListIterator<E> implements Iterator {
 
     return oldCurr.val;
   }
+
 }
 
-public class SinglyLinkedList<E> {
+public class SinglyLinkedList<E> implements Iterable {
 
   private SinglyLinkedNode<E> head;
-  public int length;
+  private int len;
 
   // ! SinglyLinkedList()
   // ? A nullary SinglyLinkedList<E> constructor.
   // ? Sets default length to 0 and head to null.
   // * Expected runtime: O(1)
   SinglyLinkedList() {
-    length = 0;
+    this.len = 0;
   }
 
   // ! SinglyLinkedNode<E> indexNode(int idx)
@@ -66,6 +70,13 @@ public class SinglyLinkedList<E> {
     return indexNode(idx).val;
   }
 
+  // ! int length()
+  // ? Returns the length of the SinglyLinkedList<E>.
+  // * Expected runtime: O(1)
+  int length() {
+    return len;
+  }
+
   // ! void addAfter(SinglyLinkedNode<E> node, int idx)
   // ? Adds `node` into the linked list by putting it AFTER the
   // ? `idx`th node.
@@ -76,7 +87,7 @@ public class SinglyLinkedList<E> {
     node.next = before.next;
     before.next = node;
 
-    length += 1;
+    len += 1;
   }
 
   // ! void addBefore(SinglyLinkedNode<E> node, int idx)
@@ -88,19 +99,19 @@ public class SinglyLinkedList<E> {
       node.next = head;
       head = node;
 
-      length += 1;
+      len += 1;
       return;
     }
 
-    addNodeAfter(node, idx - 1);
+    addAfter(node, idx - 1);
   }
 
   void addBefore(E val, int idx) {
-    addNodeBefore(new SinglyLinkedNode<>(val), idx);
+    addBefore(new SinglyLinkedNode<>(val), idx);
   }
 
   void addAfter(E val, int idx) {
-    addNodeAfter(new SinglyLinkedNode<>(val), idx);
+    addAfter(new SinglyLinkedNode<>(val), idx);
   }
 
   void cons(E val) {
@@ -113,7 +124,7 @@ public class SinglyLinkedList<E> {
       head = head.next;
       oldHead.next = null;
 
-      length -= 1;
+      len -= 1;
       return oldHead.val;
     }
 
@@ -123,7 +134,7 @@ public class SinglyLinkedList<E> {
     before.next = toRemove.next;
     toRemove.next = null;
 
-    length -= 1;
+    len -= 1;
     return toRemove.val;
   }
 
@@ -131,8 +142,12 @@ public class SinglyLinkedList<E> {
     return remove(0);
   }
 
+  public Iterator<E> iterator() {
+    return (Iterator<E>)new SinglyLinkedListIterator<E>(this);
+  }
+
   public SinglyLinkedList<E> clone() {
-    if (length == 0) {
+    if (len == 0) {
       return new SinglyLinkedList<>();
     }
 
@@ -146,7 +161,7 @@ public class SinglyLinkedList<E> {
       listLast = listLast.next;
     }
 
-    listClone.length = length;
+    listClone.len = len;
     return listClone;
   }
 
@@ -169,7 +184,7 @@ public class SinglyLinkedList<E> {
   }
 
   boolean isEmpty() {
-    return length == 0;
+    return len == 0;
   }
 
   public String toString() {
