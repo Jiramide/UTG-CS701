@@ -4,11 +4,13 @@
 - [UTG - CS701](#utg---cs701)
 	- [Table of Contents](#table-of-contents)
 	- [Intro](#intro)
+	- [Compilation and Execution](#compilation-and-execution)
+		- [Compilation](#compilation)
+		- [Execution](#execution)
 	- [Curriculum](#curriculum)
 
 
 ---
-
 ## Intro ##
 
 This repository contains code written by [Jade Piramide](https://www.github.com/Jiramide) in his CS701
@@ -18,7 +20,25 @@ The programming language used in the course is Java, albeit I may add
 code using other languages for comparison.
 
 All Java code will follow Google's [Java style guide](https://google.github.io/styleguide/javaguide.html)
-unless specified in the `.editorconfig` file located in the file tree.
+unless specified in the `.editorconfig` file located in the file tree
+
+
+---
+## Compilation and Execution ##
+
+`.java` files are located within `src/pkg_name`. The package name that I'm using is `com.company`.
+
+`.class` files should *ideally* be put into `out/pkg_name`. This repository will provide a `MAKEFILE` to make compilation and execution easy.
+
+### Compilation ###
+```
+$> make compile files=files
+```
+
+### Execution ###
+```
+$> make execute entry_point=entry_point
+```
 
 ---
 ## Curriculum ##
