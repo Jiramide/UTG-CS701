@@ -37,6 +37,19 @@ public class Main {
     System.out.println("\nOriginal length: " + llist.length());
     System.out.println("Clone length: " + llistc.length());
 
+    Stack<Integer> stack = new Stack<>();
+
+    for (Integer idx = 0; idx < 100; idx++) {
+      stack.push(idx);
+    }
+
+    while (!stack.isEmpty() && stack.peek() > 50) {
+      System.out.print(stack.pop());
+      System.out.print(" ");
+    }
+
+    System.out.println("\n" + stack.toString());
+
   }
 
 }
