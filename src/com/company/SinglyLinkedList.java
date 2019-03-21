@@ -46,7 +46,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   // ? A nullary SinglyLinkedList<E> constructor.
   // ? Sets default length to 0 and head to null.
   // * Expected runtime: O(1)
-  SinglyLinkedList() {
+  public SinglyLinkedList() {
     this.len = 0;
   }
 
@@ -54,7 +54,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   // ? Gets the `idx`th node in the linked list by
   // ? traversing the list until we get to the desired index.
   // * Expected runtime: O(n)
-  SinglyLinkedNode<E> indexNode(int idx) {
+  protected SinglyLinkedNode<E> indexNode(int idx) {
     SinglyLinkedNode<E> curr = head;
 
     for (; idx > 0; idx--) {
@@ -68,14 +68,14 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   // ? Gets the `idx`th node's value in the linked list.
   // ? Relies and expects that `indexNode` is to return a non null value.
   // * Expected runtime: O(n)
-  E index(int idx) {
+  public E index(int idx) {
     return indexNode(idx).val;
   }
 
   // ! int length()
   // ? Returns the length of the SinglyLinkedList<E>.
   // * Expected runtime: O(1)
-  int length() {
+  public int length() {
     return len;
   }
 
@@ -83,7 +83,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   // ? Adds `node` into the linked list by putting it AFTER the
   // ? `idx`th node.
   // * Expected runtime: O(n)
-  void addAfter(SinglyLinkedNode<E> node, int idx) {
+  private void addNodeAfter(SinglyLinkedNode<E> node, int idx) {
     SinglyLinkedNode<E> before = indexNode(idx);
 
     node.next = before.next;
@@ -96,7 +96,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   // ? Adds `node` into the linked list by putting it BEFORE the
   // ? `idx`th node.
   // * Expected runtime: O(n)
-  void addBefore(SinglyLinkedNode<E> node, int idx) {
+  private void addNodeBefore(SinglyLinkedNode<E> node, int idx) {
     if (idx == 0) {
       node.next = head;
       head = node;
@@ -105,22 +105,22 @@ public class SinglyLinkedList<E> implements Iterable<E> {
       return;
     }
 
-    addAfter(node, idx - 1);
+    addNodeAfter(node, idx - 1);
   }
 
-  void addBefore(E val, int idx) {
-    addBefore(new SinglyLinkedNode<>(val), idx);
+  public void addBefore(E val, int idx) {
+    addNodeBefore(new SinglyLinkedNode<>(val), idx);
   }
 
-  void addAfter(E val, int idx) {
-    addAfter(new SinglyLinkedNode<>(val), idx);
+  public void addAfter(E val, int idx) {
+    addNodeAfter(new SinglyLinkedNode<>(val), idx);
   }
 
-  void cons(E val) {
+  public void cons(E val) {
     addBefore(val, 0);
   }
 
-  E remove(int idx) {
+  public E remove(int idx) {
     if (idx == 0) {
       SinglyLinkedNode<E> oldHead = head;
       head = head.next;
@@ -140,7 +140,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     return toRemove.val;
   }
 
-  E uncons() {
+  public E uncons() {
     return remove(0);
   }
 
@@ -169,7 +169,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     return listClone;
   }
 
-  int indexOf(E elem) {
+  public int indexOf(E elem) {
     int currIdx = 0;
 
     for (SinglyLinkedNode<E> curr = head; curr != null; curr = curr.next) {
@@ -183,11 +183,11 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     return -1;
   }
 
-  boolean contains(E elem) {
+  public boolean contains(E elem) {
     return indexOf(elem) != -1;
   }
 
-  boolean isEmpty() {
+  public boolean isEmpty() {
     return len == 0;
   }
 
