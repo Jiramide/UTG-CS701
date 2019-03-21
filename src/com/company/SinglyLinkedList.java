@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.Iterator;
 import java.lang.Iterable;
+import java.lang.StringBuilder;
 
 class SinglyLinkedNode<E> {
 
@@ -193,13 +194,15 @@ public class SinglyLinkedList<E> implements Iterable<E> {
 
   @Override
   public String toString() {
-    String readable = "SinglyLinkedList { ";
+    StringBuilder readable = new StringBuilder("SinglyLinkedList { ");
 
     for (SinglyLinkedNode<E> curr = head; curr != null; curr = curr.next) {
-      readable += curr.val.toString() + "; ";
+      readable.append(curr.val);
+      readable.append("; ");
     }
 
-    return readable + "}";
+    readable.append("}");
+    return readable.toString();
   }
 
 }
