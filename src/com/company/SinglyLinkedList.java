@@ -147,7 +147,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
 
   @Override
   public Iterator<E> iterator() {
-    return (Iterator<E>)new SinglyLinkedListIterator<E>(this);
+    return new SinglyLinkedListIterator<E>(this);
   }
 
   @Override
