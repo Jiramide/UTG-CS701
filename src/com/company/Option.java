@@ -32,4 +32,5 @@ public class Option<T> {
   public static <T> T fromOption(Option<T> opt, T def) {
     return opt.hasValue ? opt.val : def;
   }
+
 }
