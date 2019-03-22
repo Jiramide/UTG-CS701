@@ -50,6 +50,15 @@ public class Main {
 
     System.out.println("\n" + stack.toString());
 
+    while (!stack.isEmpty()) {
+      System.out.print(stack.safePop());
+      System.out.print(" ");
+    }
+
+    System.out.println(stack.safePop());
+    System.out.println(stack.safePop());
+    System.out.println(stack.safePop());
+
   }
 
 }
