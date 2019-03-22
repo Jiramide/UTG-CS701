@@ -3,6 +3,15 @@ package com.company;
 import java.util.function.Function;
 
 /**
+ * <p>
+ * An Option is an object which have two states: empty and non-empty.
+ * Empty Options don't contain a value while non-empty Options do. Working with
+ * Options makes it more difficult to hit NullPointerException errors,
+ * assuming that you never try and get out of the Option context unsafely (ie getVal).
+ * Option allows for "safe nulls" and allows you to perform actions on values (which may not exist)
+ * without having to check whether they exist. This cleans up a lot of boilerplate code that try
+ * to test for null.
+ * </p>
  * @author Jade Piramide <jadepiramidepogi@gmail.com>
  * @param <T> The type held inside the Option.
  */
