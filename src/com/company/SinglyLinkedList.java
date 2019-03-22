@@ -75,7 +75,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   }
 
   public Option<E> safeIndex(int idx) {
-    return safeIndexNode(idx).fmap(n -> n.val);
+    return safeIndexNode(idx).map(n -> n.val);
   }
 
   public int length() {

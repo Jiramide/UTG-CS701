@@ -76,7 +76,7 @@ public class Option<T> {
    * @param f The function responsible for transforming the value, if it exists.
    * @return A new Option which may contain the transformed value or be empty.
    */
-  public <U> Option<U> fmap(Function<T, U> f) {
+  public <U> Option<U> map(Function<T, U> f) {
     return hasValue ? new Option<>(f.apply(val)) : new Option<>();
   }
 
