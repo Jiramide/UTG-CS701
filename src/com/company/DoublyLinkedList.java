@@ -319,6 +319,10 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     return indexOf(elem) != -1;
   }
 
+  public boolean isEmpty() {
+    return len == 0;
+  }
+
   @Override
   public String toString() {
     StringBuilder readable = new StringBuilder("DoublyLinkedList { ");
