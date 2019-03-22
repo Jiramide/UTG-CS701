@@ -18,8 +18,16 @@ public class Stack<E> {
     return container.uncons();
   }
 
+  public Option<E> safePop() {
+    return container.safeUncons();
+  }
+
   public E peek() {
     return container.index(0);
+  }
+
+  public Option<E> safePeek() {
+    return container.safeIndex(0);
   }
 
   public boolean isEmpty() {
