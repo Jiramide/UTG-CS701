@@ -77,7 +77,9 @@ public class Option<T> {
    * @return A new Option which may contain the transformed value or be empty.
    */
   public <U> Option<U> map(Function<T, U> f) {
-    return hasValue ? new Option<>(f.apply(val)) : new Option<>();
+    return hasValue
+      ? new Option<>(f.apply(val))
+      : new Option<>();
   }
 
   /**
@@ -101,7 +103,9 @@ public class Option<T> {
    * @return A new Option.
    */
   public <U> Option<U> bind(Function<T, Option<U>> f) {
-    return hasValue ? f.apply(val) : new Option<>();
+    return hasValue
+      ? f.apply(val)
+      : new Option<>();
   }
 
   /**
@@ -113,11 +117,15 @@ public class Option<T> {
    * @return Either the defaultVal or the value of the Option, transformed by the function.
    */
   public <U> U maybe(Function<T, U> f, U defaultVal) {
-    return hasValue ? f.apply(val) : defaultVal;
+    return hasValue
+      ? f.apply(val)
+      : defaultVal;
   }
 
   public String toString() {
-    return hasValue ? "Value(" + val.toString() + ")" : "Empty()";
+    return hasValue
+      ? "Value(" + val.toString() + ")"
+      : "Empty()";
   }
 
   /**
@@ -128,7 +136,9 @@ public class Option<T> {
    * @return The unwrapped value of the Option or the defaultVal provided.
    */
   public static <T> T fromOption(Option<T> opt, T defaultVal) {
-    return opt.hasValue ? opt.val : defaultVal;
+    return opt.hasValue
+      ? opt.val
+      : defaultVal;
   }
 
 }

@@ -63,11 +63,9 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   }
 
   protected Option<SinglyLinkedNode<E>> safeIndexNode(int idx) {
-    if (idx >= len) {
-      return new Option<>();
-    }
-
-    return new Option<>(indexNode(idx));
+    return idx < len
+      ? new Option<>(indexNode(idx)) // Safe to index
+      : new Option<>(); // Unsafe to index, return empty Option.
   }
 
   public E index(int idx) {
@@ -140,11 +138,9 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   }
 
   public Option<E> safeRemove(int idx) {
-    if (idx >= len) {
-      return new Option<>();
-    }
-
-    return new Option<>(remove(idx));
+    return idx < len
+      ? new Option<>(remove(idx)) // Safe to remove
+      : new Option<>(); // Unsafe to remove, return empty Option
   }
 
   public E uncons() {
