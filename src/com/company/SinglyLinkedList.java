@@ -141,7 +141,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
 
   public Option<E> safeRemove(int idx) {
     if (idx >= len) {
-      return Option.empty;
+      return new Option<>();
     }
 
     return new Option<>(remove(idx));
