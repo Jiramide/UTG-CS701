@@ -3,6 +3,7 @@ package com.company;
 import java.util.Iterator;
 import java.lang.Iterable;
 import java.lang.StringBuilder;
+import java.lang.IndexOutOfBoundsException;
 
 class SinglyLinkedNode<E> {
 
@@ -56,6 +57,10 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   // ? traversing the list until we get to the desired index.
   // * Expected runtime: O(n)
   protected SinglyLinkedNode<E> indexNode(int idx) {
+    if (idx >= len) {
+      throw new IndexOutOfBoundsException("Cannot index element #" + idx + " in SinglyLinkedList.");
+    }
+
     SinglyLinkedNode<E> curr = head;
 
     for (; idx > 0; idx--) {
@@ -65,12 +70,24 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     return curr;
   }
 
+  protected Option<SinglyLinkedNode<E>> safeIndexNode(int idx) {
+    if (idx >= len) {
+      return new Option<>();
+    }
+
+    return new Option<>(indexNode(idx));
+  }
+
   // ! E index(int idx)
   // ? Gets the `idx`th node's value in the linked list.
   // ? Relies and expects that `indexNode` is to return a non null value.
   // * Expected runtime: O(n)
   public E index(int idx) {
     return indexNode(idx).val;
+  }
+
+  public Option<E> safeIndex(int idx) {
+    return safeIndexNode(idx).fmap(n -> n.val);
   }
 
   // ! int length()
@@ -122,6 +139,10 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   }
 
   public E remove(int idx) {
+    if (idx >= len) {
+      throw new IndexOutOfBoundsException("Cannot remove element #" + idx + " from SinglyLinkedList.");
+    }
+
     if (idx == 0) {
       SinglyLinkedNode<E> oldHead = head;
       head = head.next;
@@ -141,8 +162,20 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     return toRemove.val;
   }
 
+  public Option<E> safeRemove(int idx) {
+    if (idx >= len) {
+      return new Option<>();
+    }
+
+    return new Option<>(remove(idx));
+  }
+
   public E uncons() {
     return remove(0);
+  }
+
+  public Option<E> safeUncons() {
+    return safeRemove(0);
   }
 
   @Override
