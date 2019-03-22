@@ -59,6 +59,12 @@ public class Main {
     System.out.println(stack.safePop());
     System.out.println(stack.safePop());
 
+    Option<Integer> o = (new Option<>(99))
+      .fmap(x -> x.toString())
+      .fmap(x -> Integer.valueOf(x));
+
+    System.out.println(o);
+
   }
 
 }
