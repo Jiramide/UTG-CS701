@@ -36,7 +36,9 @@ public class Stack<E> {
 
   @Override
   public String toString() {
-    return container.length() + ": " + peek().toString();
+    return isEmpty()
+      ? "[~]: Null"
+      : "[" + container.length() + "]: " + peek().toString();
   }
 
 }
