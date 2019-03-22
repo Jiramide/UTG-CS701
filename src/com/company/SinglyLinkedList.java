@@ -48,8 +48,12 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     this.len = 0;
   }
 
+  public boolean validIndex(int idx) {
+    return idx > 0 && idx < len;
+  }
+
   protected SinglyLinkedNode<E> indexNode(int idx) {
-    if (idx >= len) {
+    if (!validIndex(idx)) {
       throw new IndexOutOfBoundsException("Cannot index element #" + idx + " in SinglyLinkedList.");
     }
 
@@ -63,7 +67,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   }
 
   protected Option<SinglyLinkedNode<E>> safeIndexNode(int idx) {
-    return idx < len
+    return validIndex(idx)
       ? new Option<>(indexNode(idx)) // Safe to index.
       : new Option<>(); // Unsafe to index, return empty Option.
   }
@@ -114,7 +118,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   }
 
   public E remove(int idx) {
-    if (idx >= len) {
+    if (!validIndex(idx)) {
       throw new IndexOutOfBoundsException("Cannot remove element #" + idx + " from SinglyLinkedList.");
     }
 
@@ -138,7 +142,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   }
 
   public Option<E> safeRemove(int idx) {
-    return idx < len
+    return validIndex(idx)
       ? new Option<>(remove(idx)) // Safe to remove.
       : new Option<>(); // Unsafe to remove, return empty Option.
   }
@@ -149,6 +153,14 @@ public class SinglyLinkedList<E> implements Iterable<E> {
 
   public Option<E> safeUncons() {
     return safeRemove(0);
+  }
+
+  public E peek() {
+    return index(0);
+  }
+
+  public Option<E> safePeek() {
+    return safeIndex(0);
   }
 
   @Override
