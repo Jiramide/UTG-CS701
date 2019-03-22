@@ -44,18 +44,10 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   private SinglyLinkedNode<E> head;
   private int len;
 
-  // ! SinglyLinkedList()
-  // ? A nullary SinglyLinkedList<E> constructor.
-  // ? Sets default length to 0 and head to null.
-  // * Expected runtime: O(1)
   public SinglyLinkedList() {
     this.len = 0;
   }
 
-  // ! SinglyLinkedNode<E> indexNode(int idx)
-  // ? Gets the `idx`th node in the linked list by
-  // ? traversing the list until we get to the desired index.
-  // * Expected runtime: O(n)
   protected SinglyLinkedNode<E> indexNode(int idx) {
     if (idx >= len) {
       throw new IndexOutOfBoundsException("Cannot index element #" + idx + " in SinglyLinkedList.");
@@ -78,10 +70,6 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     return new Option<>(indexNode(idx));
   }
 
-  // ! E index(int idx)
-  // ? Gets the `idx`th node's value in the linked list.
-  // ? Relies and expects that `indexNode` is to return a non null value.
-  // * Expected runtime: O(n)
   public E index(int idx) {
     return indexNode(idx).val;
   }
@@ -90,17 +78,10 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     return safeIndexNode(idx).fmap(n -> n.val);
   }
 
-  // ! int length()
-  // ? Returns the length of the SinglyLinkedList<E>.
-  // * Expected runtime: O(1)
   public int length() {
     return len;
   }
 
-  // ! void addAfter(SinglyLinkedNode<E> node, int idx)
-  // ? Adds `node` into the linked list by putting it AFTER the
-  // ? `idx`th node.
-  // * Expected runtime: O(n)
   private void addNodeAfter(SinglyLinkedNode<E> node, int idx) {
     SinglyLinkedNode<E> before = indexNode(idx);
 
@@ -110,10 +91,6 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     len += 1;
   }
 
-  // ! void addBefore(SinglyLinkedNode<E> node, int idx)
-  // ? Adds `node` into the linked list by putting it BEFORE the
-  // ? `idx`th node.
-  // * Expected runtime: O(n)
   private void addNodeBefore(SinglyLinkedNode<E> node, int idx) {
     if (idx == 0) {
       node.next = head;
@@ -164,7 +141,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
 
   public Option<E> safeRemove(int idx) {
     if (idx >= len) {
-      return new Option<>();
+      return Option.empty;
     }
 
     return new Option<>(remove(idx));
