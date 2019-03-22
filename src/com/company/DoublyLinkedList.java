@@ -61,12 +61,12 @@ class DoublyLinkedListIterator<E> implements ListIterator<E> {
 
   @Override
   public boolean hasNext() {
-    return curr.next != null;
+    return curr != null;
   }
 
   @Override
   public boolean hasPrevious() {
-    return curr.prev != null;
+    return curr != null;
   }
 
   @Override
@@ -172,6 +172,14 @@ public class DoublyLinkedList<E> implements Iterable<E> {
   }
 
   private void addNodeAfter(DoublyLinkedNode<E> node, int idx) {
+    if (len == 0) {
+      head = node;
+      last = node;
+
+      len += 1;
+      return;
+    }
+
     DoublyLinkedNode<E> before = indexNode(idx);
     DoublyLinkedNode.makeNeighbours(before, node, before.next);
 
@@ -183,6 +191,14 @@ public class DoublyLinkedList<E> implements Iterable<E> {
   }
 
   private void addNodeBefore(DoublyLinkedNode<E> node, int idx) {
+    if (len == 0) {
+      head = node;
+      last = node;
+
+      len += 1;
+      return;
+    }
+
     DoublyLinkedNode<E> after = indexNode(idx);
     DoublyLinkedNode.makeNeighbours(after.prev, node, after);
 
@@ -205,8 +221,8 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     addBefore(val, 0);
   }
 
-  public void consBack(E val) {
-    addAfter(val, len);
+  public void consLast(E val) {
+    addAfter(val, len - 1);
   }
 
   public E remove(int idx) {
@@ -241,11 +257,11 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     return safeRemove(0);
   }
 
-  public E unconsBack() {
+  public E unconsLast() {
     return remove(len - 1);
   }
 
-  public Option<E> safeUnconsBack() {
+  public Option<E> safeUnconsLast() {
     return safeRemove(len - 1);
   }
 
@@ -259,7 +275,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     DoublyLinkedList<E> listClone = new DoublyLinkedList<>();
 
     for (DoublyLinkedNode<E> curr = head; curr != null; curr = curr.next) {
-      listClone.consBack(curr.val);
+      listClone.consLast(curr.val);
     }
 
     return listClone;
