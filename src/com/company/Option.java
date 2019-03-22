@@ -29,6 +29,10 @@ public class Option<T> {
     return hasValue ? f.apply(val) : def;
   }
 
+  public String toString() {
+    return hasValue ? "Value(" + val.toString() + ")" : "Empty()";
+  }
+
   public static <T> T fromOption(Option<T> opt, T def) {
     return opt.hasValue ? opt.val : def;
   }
