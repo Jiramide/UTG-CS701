@@ -17,7 +17,7 @@ public class StackArr<E> {
   }
 
   public void push(E val) {
-    if (top >= capacity) {
+    if (isFull()) {
       throw new StackOverflowError("StackArr exceeds capacity of " + capacity);
     }
 
@@ -25,7 +25,7 @@ public class StackArr<E> {
   }
 
   public E pop() {
-    if (top < 0) {
+    if (isEmpty()) {
       throw new RuntimeException("StackArr: stack underflow");
     }
 
@@ -33,13 +33,13 @@ public class StackArr<E> {
   }
 
   public Option<E> safePop() {
-    return top >= 0
+    return !isEmpty()
       ? new Option<>(pop())
       : new Option<>();
   }
 
   public E peek() {
-    if (top < 0) {
+    if (isEmpty()) {
       throw new RuntimeException("StackArr: stack underflow");
     }
 
@@ -47,9 +47,17 @@ public class StackArr<E> {
   }
 
   public Option<E> safePeek() {
-    return top >= 0
+    return !isEmpty()
       ? new Option<>(peek())
       : new Option<>();
+  }
+
+  public boolean isEmpty() {
+    return top <= 0;
+  }
+
+  public boolean isFull() {
+    return top >= capacity;
   }
 
 }
