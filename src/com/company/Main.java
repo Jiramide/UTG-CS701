@@ -63,7 +63,12 @@ public class Main {
       .map(x -> x.toString())
       .map(x -> Integer.valueOf(x));
 
+    Option<Integer> p = (new Option<>())
+      .map(x -> x.toString())
+      .map(x -> Integer.valueOf(x));
+
     System.out.println(o);
+    System.out.println(p);
 
     DoublyLinkedList<Integer> dllist = new DoublyLinkedList<>();
 

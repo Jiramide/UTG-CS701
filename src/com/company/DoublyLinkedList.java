@@ -128,7 +128,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
   }
 
   public boolean validIndex(int idx) {
-    return idx > 0 && idx < len;
+    return idx >= 0 && idx < len;
   }
 
   protected DoublyLinkedNode<E> indexNode(int idx) {

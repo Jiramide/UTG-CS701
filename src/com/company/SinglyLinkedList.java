@@ -49,7 +49,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   }
 
   public boolean validIndex(int idx) {
-    return idx > 0 && idx < len;
+    return idx >= 0 && idx < len;
   }
 
   protected SinglyLinkedNode<E> indexNode(int idx) {
