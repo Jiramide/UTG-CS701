@@ -59,9 +59,10 @@ public class Main {
     System.out.println(stack.safePop());
     System.out.println(stack.safePop());
 
-    Option<Integer> o = (new Option<>(99))
+    Option<Double> o = (new Option<>(99))
       .map(x -> x.toString())
-      .map(x -> Integer.valueOf(x));
+      .map(x -> Integer.valueOf(x))
+      .map(x -> x / 2.0);
 
     Option<Integer> p = (new Option<>())
       .map(x -> x.toString())

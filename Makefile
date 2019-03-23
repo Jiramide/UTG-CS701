@@ -2,12 +2,6 @@ EXTRA_COMPILER_ARGS := -Xlint
 
 .all: compile execute
 
-.compile:
-	cd src \
-	javac $(EXTRA_COMPILER_ARGS) -d ../out $(files) \
-	cd .. \
+.compile: java $(EXTRA_COMPILER_ARGS) -d out -cp src $(files)
 
-.execute:
-	cd out \
-	java $(entry_point) \
-	cd .. \
+.execute: java -cp out $(entry_point)
