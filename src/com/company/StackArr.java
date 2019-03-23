@@ -7,11 +7,14 @@ import java.lang.RuntimeException;
 public class StackArr<E> {
 
   private E[] container;
-  private int top; // top is the idx of the next empty slot. the top most item is at idx top - 1
+  private int top; // top is the idx of the cell to write to. the most recent push is at top - 1
   private int capacity;
 
   public StackArr(Class<E> cls, int capacity) {
+    // refer to https://stackoverflow.com/questions/529085/how-to-create-a-generic-array-in-java
+    @SuppressWarnings("unchecked");
     this.container = (E[]) Array.newInstance(cls, capacity);
+
     this.top = 0;
     this.capacity = capacity;
   }
