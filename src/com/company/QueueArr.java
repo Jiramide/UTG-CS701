@@ -11,7 +11,7 @@ public class QueueArr<E> {
 
   public QueueArr(Class<E> cls, int capacity) {
     // refer to https://stackoverflow.com/questions/529085/how-to-create-a-generic-array-in-java
-    @SuppressWarnings("unchecked");
+    @SuppressWarnings("unchecked")
     this.container = (E[]) Array.newInstance(cls, capacity);
 
     this.enqueueIdx = 0;
