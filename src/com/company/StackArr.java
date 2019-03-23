@@ -55,6 +55,10 @@ public class StackArr<E> {
       : new Option<>();
   }
 
+  public int numItems() {
+    return top;
+  }
+
   public boolean isEmpty() {
     return top <= 0;
   }

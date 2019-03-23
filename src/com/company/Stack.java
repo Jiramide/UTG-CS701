@@ -30,6 +30,10 @@ public class Stack<E> {
     return container.safeIndex(0);
   }
 
+  public int numItems() {
+    return container.length();
+  }
+
   public boolean isEmpty() {
     return container.isEmpty();
   }

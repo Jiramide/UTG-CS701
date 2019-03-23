@@ -28,6 +28,10 @@ public class Queue<E> {
     return container.safePeek();
   }
 
+  public int numItems() {
+    return container.length();
+  }
+
   public boolean isEmpty() {
     return container.isEmpty();
   }
