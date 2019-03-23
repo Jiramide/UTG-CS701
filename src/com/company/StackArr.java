@@ -13,7 +13,8 @@ public class StackArr<E> {
   public StackArr(Class<E> cls, int capacity) {
     // refer to https://stackoverflow.com/questions/529085/how-to-create-a-generic-array-in-java
     @SuppressWarnings("unchecked")
-    this.container = (E[]) Array.newInstance(cls, capacity);
+    final E[] container = (E[]) Array.newInstance(cls, capacity);
+    this.container = container;
 
     this.top = 0;
     this.capacity = capacity;

@@ -1,5 +1,6 @@
 package com.company;
 
+import java.lang.reflect.Array;
 import java.lang.RuntimeException;
 
 public class QueueArr<E> {
@@ -12,7 +13,8 @@ public class QueueArr<E> {
   public QueueArr(Class<E> cls, int capacity) {
     // refer to https://stackoverflow.com/questions/529085/how-to-create-a-generic-array-in-java
     @SuppressWarnings("unchecked")
-    this.container = (E[]) Array.newInstance(cls, capacity);
+    final E[] container = (E[]) Array.newInstance(cls, capacity);
+    this.container = container;
 
     this.enqueueIdx = 0;
     this.dequeueIdx = 0;
