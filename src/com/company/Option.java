@@ -62,6 +62,18 @@ public class Option<T> {
   }
 
   /**
+   * Unwraps the value from an Option.
+   * @param <T> The type of the value inside the Option.
+   * @param defaultVal The value to return if the Option is empty.
+   * @return The unwrapped value of the Option or the defaultVal provided.
+   */
+  public T fromOption(T defaultVal) {
+    return hasValue
+      ? val
+      : defaultVal;
+  }
+
+  /**
    * Transforms the value inside an Option<T>, if it exists.
    *
    * <p>
@@ -126,19 +138,6 @@ public class Option<T> {
     return hasValue
       ? "Value(" + val.toString() + ")"
       : "Empty()";
-  }
-
-  /**
-   * Unwraps the value from an Option.
-   * @param <T> The type of the value inside the Option.
-   * @param opt The Option to unwrap.
-   * @param defaultVal The value to return if the Option is empty.
-   * @return The unwrapped value of the Option or the defaultVal provided.
-   */
-  public static <T> T fromOption(Option<T> opt, T defaultVal) {
-    return opt.hasValue
-      ? opt.val
-      : defaultVal;
   }
 
 }
