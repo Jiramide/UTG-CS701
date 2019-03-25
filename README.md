@@ -23,7 +23,6 @@ code using other languages for comparison.
 All Java code will follow Google's [Java style guide](https://google.github.io/styleguide/javaguide.html)
 unless specified in the `.editorconfig` file located in the file tree
 
-
 ---
 ## Compilation and Execution ##
 
