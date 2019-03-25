@@ -134,7 +134,9 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @see SinglyLinkedList.index
    */
   public Option<E> safeIndex(int idx) {
-    return safeIndexNode(idx).map(n -> n.val);
+    return validIndex(idx)
+      ? new Option<>(index(idx)) // Safe to index.
+      : new Option<>(); // Unsafe to index, return empty Option.
   }
 
   /**

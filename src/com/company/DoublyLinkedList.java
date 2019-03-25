@@ -168,7 +168,9 @@ public class DoublyLinkedList<E> implements Iterable<E> {
   }
 
   public Option<E> safeIndex(int idx) {
-    return safeIndexNode(idx).map(x -> x.val);
+    return validIndex(idx)
+      ? new Option<>(index(idx)); // Safe to index.
+      : new Option<>(); // Unsafe to index, return empty Option.
   }
 
   public int length() {
