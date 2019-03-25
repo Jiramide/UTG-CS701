@@ -4,7 +4,7 @@ import java.util.function.Function;
 
 /**
  * <p>
- * An Option is an object which have two states: empty and non-empty.
+ * An Option is an object which has two states: empty and non-empty.
  * Empty Options don't contain a value while non-empty Options do. Working with
  * Options makes it more difficult to hit NullPointerException errors,
  * assuming that you never try and get out of the Option context unsafely (ie getVal).
@@ -12,6 +12,7 @@ import java.util.function.Function;
  * without having to check whether they exist. This cleans up a lot of boilerplate code that try
  * to test for null.
  * </p>
+ *
  * @author Jade Piramide <jadepiramidepogi@gmail.com>
  * @param <T> The type held inside the Option.
  */
@@ -122,7 +123,6 @@ public class Option<T> {
 
   /**
    * Applies a function to the value if it exists, otherwise returns the default value.
-   *
    * @param <U> The type which the function returns.
    * @param f The function applied to the value (if it exists).
    * @param defaultVal The value returned if the Option is empty.
