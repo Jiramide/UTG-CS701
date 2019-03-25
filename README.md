@@ -7,6 +7,7 @@
 	- [Compilation and Execution](#compilation-and-execution)
 		- [Compilation](#compilation)
 		- [Execution](#execution)
+		- [Cleaning](#cleaning)
 	- [Curriculum](#curriculum)
 
 
@@ -32,13 +33,21 @@ unless specified in the `.editorconfig` file located in the file tree
 
 ### Compilation ###
 ```
-$> make compile files=files
+$> make
 ```
 
 ### Execution ###
 ```
-$> make execute entry_point=entry_point
+$> make execute
 ```
+
+### Cleaning ###
+```
+$> make clean
+```
+
+Variables are located in the `Makefile` (most notably `PKG_DIR` and `EXTRA_COMPILER_ARGS`) for you to change
+whenever compiling and executing.
 
 ---
 ## Curriculum ##
