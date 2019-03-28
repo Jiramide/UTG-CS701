@@ -9,7 +9,8 @@ CLASSES := pkg/Option.class \
 	pkg/QueueArr.class \
 	pkg/SinglyLinkedList.class \
 	pkg/Stack.class \
-	pkg/StackArr.class
+	pkg/StackArr.class \
+	pkg/ParenthesizedString.class
 
 out/$(PKG_DIR)/Main.java : src/$(PKG_DIR)/Main.java $(subst pkg/,out/$(PKG_DIR)/,$(CLASSES))
 	javac $(EXTRA_COMPILER_ARGS) -d out -cp src src/$(PKG_DIR)/Main.java
