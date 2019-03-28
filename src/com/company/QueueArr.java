@@ -34,7 +34,10 @@ public class QueueArr<E> {
       throw new RuntimeException("QueueArr: queue underflow");
     }
 
-    return container[dequeueIdx++ % capacity];
+    E ret = container[dequeueIdx++ % capacity];
+    container[dequeueIdx % capacity] = null;
+
+    return ret;
   }
 
   public Option<E> safeDequeue() {

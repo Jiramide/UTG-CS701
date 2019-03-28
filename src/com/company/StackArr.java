@@ -33,7 +33,10 @@ public class StackArr<E> {
       throw new RuntimeException("StackArr: stack underflow");
     }
 
-    return container[--top];
+    E ret = container[--top];
+    container[top] = null;
+
+    return ret;
   }
 
   public Option<E> safePop() {
