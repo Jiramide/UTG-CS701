@@ -66,6 +66,22 @@ public class Main {
         System.out.println(graph.numSets());
       }
 
+      Integer[] arr = {1, 8, 5, 3, 0, 7, 2, 6, 9, 4};
+      System.out.println("Using Comparable");
+      System.out.print("Unsorted: ");
+      for (Integer i : arr) {
+        System.out.print(i);
+        System.out.print(" ");
+      }
+
+      System.out.print("\nSorted:");
+
+      BubbleSort.sort(arr);
+      for (Integer i : arr) {
+        System.out.print(i);
+        System.out.print(" ");
+      }
+
   }
 
 }
