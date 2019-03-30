@@ -11,6 +11,9 @@ public class BubbleSort {
         E fst = arr[idx];
         E snd = arr[idx + 1];
 
+        // compare(fst, snd) > 0 => fst > snd
+        // compare(fst, snd) < 0 => fst < snd
+        // compare(fst, snd) == 0 => fst == snd
         if (comparator.compare(fst, snd) > 0) {
           arr[idx + 1] = fst;
           arr[idx] = snd;
