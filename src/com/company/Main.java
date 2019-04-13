@@ -6,6 +6,34 @@ import java.lang.Math;
 
 public class Main {
 
+  public static <E> boolean isPalindrome(E[] arr, int i) {
+    if (i > arr.length / 2) {
+      return true;
+    }
+
+    return arr[i].equals(arr[arr.length - i - 1]) && isPalindrome(arr, i + 1);
+  }
+
+  public static <E> boolean isPalindrome(E[] arr) {
+    return isPalindrome(arr, 0);
+  }
+
+  public static <E> void reverse(E[] arr, int i, int j) {
+    if (i > j) {
+      return;
+    }
+
+    E temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+
+    reverse(arr, i + 1, j - 1);
+  }
+
+  public static <E> void reverse(E[] arr) {
+    reverse(arr, 0, arr.length - 1);
+  }
+
   public static int fact(int n) {
     if (n == 0) {
       return 1;
@@ -104,6 +132,25 @@ public class Main {
       System.out.print(i);
       System.out.print(" ");
     }
+
+    Integer[] arr2 = {1, 3, 5, 8, 10, 2, 4, 6, 7, 9};
+    System.out.println("");
+    MergeSort.merge(arr2, (x, y) -> x - y, 0, 5, 10);
+    for (Integer i : arr2) {
+      System.out.print(i);
+      System.out.print(" ");
+    }
+    System.out.println("");
+
+    reverse(arr);
+    for (Integer i : arr) {
+      System.out.print(i);
+      System.out.print(" ");
+    }
+
+    Integer[] palindrome = {0, 1, 4, 6, 4, 1, 0};
+    System.out.println("");
+    System.out.println(isPalindrome(palindrome));
 
   }
 
