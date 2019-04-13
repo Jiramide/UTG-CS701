@@ -22,6 +22,24 @@ public class QuickSort {
       }
     }
 
+    swap(arr, i, hi);
+
+    return i;
+  }
+
+  public static <E extends Comparable<E>> int partition(E[] arr, int lo, int hi) {
+    E pivot = arr[hi];
+    int i = lo;
+
+    for (int j = lo; j < hi; j++) {
+      if (arr[j].compareTo(pivot) < 0) {
+        swap(arr, i, j);
+        i += 1;
+      }
+    }
+
+    swap(arr, i, hi);
+
     return i;
   }
 
@@ -37,8 +55,16 @@ public class QuickSort {
     sort(arr, comparator, 0, arr.length - 1);
   }
 
-  public static <E extends Comparable<E>> void sort(E[] arr) {
+  public static <E extends Comparable<E>> void sort(E[] arr, int i, int j) {
+    if (i < j) {
+      int p = partition(arr, i, j);
+      sort(arr, i, p - 1);
+      sort(arr, p + 1, j);
+    }
+  }
 
+  public static <E extends Comparable<E>> void sort(E[] arr) {
+    sort(arr, 0, arr.length - 1);
   }
 
 }

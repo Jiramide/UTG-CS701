@@ -99,7 +99,7 @@ public class Main {
 
     System.out.print("\nSorted:");
 
-    QuickSort.sort(arr, (x, y) -> x - y);
+    QuickSort.sort(arr);
     for (Integer i : arr) {
       System.out.print(i);
       System.out.print(" ");
