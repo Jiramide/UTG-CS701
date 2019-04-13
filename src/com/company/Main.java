@@ -152,6 +152,15 @@ public class Main {
     System.out.println("");
     System.out.println(isPalindrome(palindrome));
 
+    int rows = in.nextInt();
+    for (int idx = 0; idx < rows; idx++) {
+      for (Integer i : PascalTriangle.getRow(idx)) {
+        System.out.print(i);
+        System.out.print(" ");
+      }
+      System.out.println("");
+    }
+
   }
 
 }
