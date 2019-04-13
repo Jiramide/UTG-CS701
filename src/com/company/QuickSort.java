@@ -11,30 +11,18 @@ public class QuickSort {
     arr[j] = temp;
   }
 
-  public static <E> int partition(E[] arr, Comparator<E> comp, int i, int j) {
-    int pivot = i;
-    i += 1;
+  public static <E> int partition(E[] arr, Comparator<E> comp, int lo, int hi) {
+    E pivot = arr[hi];
+    int i = lo;
 
-    while (i < j) {
-      boolean did = false;
-
-      if (comp.compare(arr[i], arr[pivot]) < 0) {
-        i += 1;
-        did = true;
-      }
-
-      if (comp.compare(arr[pivot], arr[j]) > 0) {
-        j -= 1;
-        did = true;
-      }
-
-      if (!did) {
+    for (int j = lo; j < hi; j++) {
+      if (comp.compare(arr[j], pivot) < 0) {
         swap(arr, i, j);
+        i += 1;
       }
     }
-    swap(arr, pivot, j);
 
-    return j;
+    return i;
   }
 
   public static <E> void sort(E[] arr, Comparator<E> comparator, int i, int j) {
