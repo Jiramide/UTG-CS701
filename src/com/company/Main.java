@@ -52,6 +52,8 @@ public class Main {
 
   public static void main(String[] args) {
 
+    /*
+
     Scanner in = new Scanner(System.in);
 
     System.out.println("Factorial");
@@ -160,6 +162,37 @@ public class Main {
       }
       System.out.println("");
     }
+
+    */
+
+    BinaryTree<Integer> tree = new BinaryTree<>();
+    tree.insert(5);
+      tree.insert(2);
+        tree.insert(1);
+          tree.insert(0);
+        tree.insert(3);
+
+          tree.insert(4);
+      tree.insert(7);
+        tree.insert(6);
+        tree.insert(9);
+          tree.insert(8);
+          tree.insert(10);
+
+    System.out.println("Preorder");
+    tree.preOrder(x -> {System.out.println(x); return 0;});
+
+    System.out.println("In-order");
+    tree.inOrder(x -> {System.out.println(x); return 0;});
+
+    System.out.println("Out-order");
+    tree.outOrder(x -> {System.out.println(x); return 0;});
+
+    System.out.println("Postorder");
+    tree.postOrder(x -> {System.out.println(x); return 0;});
+
+    System.out.println("Breadth first");
+    tree.breadthFirst(x -> {System.out.println(x); return 0;});
 
   }
 
