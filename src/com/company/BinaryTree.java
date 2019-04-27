@@ -27,6 +27,11 @@ class BinaryTreeNode<E> {
     return curr;
   }
 
+  @Override
+  public String toString() {
+    return "Node(" + val.toString() + ")";
+  }
+
 }
 
 public class BinaryTree<E extends Comparable<E>> {
@@ -39,43 +44,77 @@ public class BinaryTree<E extends Comparable<E>> {
   // postorder: LRN
 
   public void preOrder(BinaryTreeNode<E> curr, Function<E, ?> process) {
-    process(curr.val);
+    if (curr == null) {
+      return;
+    }
+
+    process.apply(curr.val);
     preOrder(curr.left, process);
     preOrder(curr.right, process);
   }
 
   public void preOrder(Function<E, ?> process) {
-    preOrder(root, process)
+    preOrder(root, process);
   }
 
   public void inOrder(BinaryTreeNode<E> curr, Function<E, ?> process) {
+    if (curr == null) {
+      return;
+    }
+
     inOrder(curr.left, process);
-    process(curr.val);
+    process.apply(curr.val);
     inOrder(curr.right, process);
   }
 
   public void inOrder(Function<E, ?> process) {
-    inOrder(root, process)
+    inOrder(root, process);
   }
 
   public void outOrder(BinaryTreeNode<E> curr, Function<E, ?> process) {
+    if (curr == null) {
+      return;
+    }
+
     outOrder(curr.right, process);
-    process(curr.val);
+    process.apply(curr.val);
     outOrder(curr.left, process);
   }
 
   public void outOrder(Function<E, ?> process) {
-    outOrder(root, process)
+    outOrder(root, process);
   }
 
   public void postOrder(BinaryTreeNode<E> curr, Function<E, ?> process) {
+    if (curr == null) {
+      return;
+    }
+
     postOrder(curr.left, process);
     postOrder(curr.right, process);
-    process(curr.val);
+    process.apply(curr.val);
   }
 
-  public void postOrder(F init, Function<E, ?> process) {
-    postOrder(root, process)
+  public void postOrder(Function<E, ?> process) {
+    postOrder(root, process);
+  }
+
+  public void breadthFirst(Function<E, ?> process) {
+    Queue<BinaryTreeNode<E>> queue = new Queue<>();
+    queue.enqueue(root);
+
+    while (!queue.isEmpty()) {
+      BinaryTreeNode<E> curr = queue.dequeue();
+      process.apply(curr.val);
+
+      if (curr.left != null) {
+        queue.enqueue(curr.left);
+      }
+
+      if (curr.right != null) {
+        queue.enqueue(curr.right);
+      }
+    }
   }
 
   public void insert(E val) {
@@ -84,7 +123,7 @@ public class BinaryTree<E extends Comparable<E>> {
       return;
     }
 
-    BinaryTreeNode<E> prev;
+    BinaryTreeNode<E> prev = null;
     BinaryTreeNode<E> curr = root;
 
     while (curr != null) {
@@ -94,10 +133,14 @@ public class BinaryTree<E extends Comparable<E>> {
         : curr.right;
     }
 
-    if (val.compareTo(curr.val) < 0) {
-      prev.left = new BinaryTreeNode<>(val);
+    if (prev != null) {
+      if (val.compareTo(prev.val) < 0) {
+        prev.left = new BinaryTreeNode<>(val);
+      } else {
+        prev.right = new BinaryTreeNode<>(val);
+      }
     } else {
-      prev.right = new BinaryTreeNode<>(val);
+      root = new BinaryTreeNode<>(val);
     }
   }
 
