@@ -38,8 +38,7 @@ public class Queue<E> {
 
   @Override
   public String toString() {
-    throw new java.lang.UnsupportedOperationException(
-      "Queue.toString is not implemented because I can't decide on how to show a Queue.");
+    return container.toString();
   }
 
 }

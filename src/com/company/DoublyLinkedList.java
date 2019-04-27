@@ -238,6 +238,12 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
     DoublyLinkedNode<E> toRemove = indexNode(idx);
 
+    if (idx == 0) {
+      head = toRemove.next;
+    } else if (idx == len - 1) {
+      last = toRemove.prev;
+    }
+
     DoublyLinkedNode.relinkNeighbours(toRemove);
     toRemove.next = null;
     toRemove.prev = null;
