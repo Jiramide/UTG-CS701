@@ -1,6 +1,7 @@
 package com.company;
 
 import java.lang.Comparable;
+import java.util.function.Function;
 
 class BinaryTreeNode<E> {
 
@@ -31,6 +32,51 @@ class BinaryTreeNode<E> {
 public class BinaryTree<E extends Comparable<E>> {
 
   BinaryTreeNode<E> root;
+
+  // preorder: NLR
+  // in-order: LNR
+  // out-order: RNL
+  // postorder: LRN
+
+  public void preOrder(BinaryTreeNode<E> curr, Function<E, ?> process) {
+    process(curr.val);
+    preOrder(curr.left, process);
+    preOrder(curr.right, process);
+  }
+
+  public void preOrder(Function<E, ?> process) {
+    preOrder(root, process)
+  }
+
+  public void inOrder(BinaryTreeNode<E> curr, Function<E, ?> process) {
+    inOrder(curr.left, process);
+    process(curr.val);
+    inOrder(curr.right, process);
+  }
+
+  public void inOrder(Function<E, ?> process) {
+    inOrder(root, process)
+  }
+
+  public void outOrder(BinaryTreeNode<E> curr, Function<E, ?> process) {
+    outOrder(curr.right, process);
+    process(curr.val);
+    outOrder(curr.left, process);
+  }
+
+  public void outOrder(Function<E, ?> process) {
+    outOrder(root, process)
+  }
+
+  public void postOrder(BinaryTreeNode<E> curr, Function<E, ?> process) {
+    postOrder(curr.left, process);
+    postOrder(curr.right, process);
+    process(curr.val);
+  }
+
+  public void postOrder(F init, Function<E, ?> process) {
+    postOrder(root, process)
+  }
 
   public void insert(E val) {
     if (root == null) {
