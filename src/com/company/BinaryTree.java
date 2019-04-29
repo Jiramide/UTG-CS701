@@ -5,15 +5,39 @@ import java.util.function.Function;
 
 class BinaryTreeNode<E> {
 
-  E val;
-  BinaryTreeNode<E> left;
-  BinaryTreeNode<E> right;
+  private E val;
+  protected BinaryTreeNode<E> left;
+  protected BinaryTreeNode<E> right;
 
   BinaryTreeNode(E val) {
     this.val = val;
   }
 
-  boolean isLeaf() {
+  public E getVal() {
+    return val;
+  }
+
+  public BinaryTreeNode<E> getLeft() {
+    return left;
+  }
+
+  public Option<BinaryTreeNode<E>> safeGetLeft() {
+    return left != null
+      ? new Option<>(left)
+      : new Option<>();
+  }
+
+  public BinaryTreeNode<E> getRight() {
+    return right;
+  }
+
+  public Option<BinaryTreeNode<E>> safeGetRight() {
+    return right != null
+      ? new Option<>(right)
+      : new Option<>();
+  }
+
+  public boolean isLeaf() {
     return left == null && right == null;
   }
 
@@ -43,69 +67,69 @@ public class BinaryTree<E extends Comparable<E>> {
   // out-order: RNL
   // postorder: LRN
 
-  public void preOrder(BinaryTreeNode<E> curr, Function<E, ?> process) {
+  public void preOrder(BinaryTreeNode<E> curr, Function<BinaryTreeNode<E>, ?> process) {
     if (curr == null) {
       return;
     }
 
-    process.apply(curr.val);
+    process.apply(curr);
     preOrder(curr.left, process);
     preOrder(curr.right, process);
   }
 
-  public void preOrder(Function<E, ?> process) {
+  public void preOrder(Function<BinaryTreeNode<E>, ?> process) {
     preOrder(root, process);
   }
 
-  public void inOrder(BinaryTreeNode<E> curr, Function<E, ?> process) {
+  public void inOrder(BinaryTreeNode<E> curr, Function<BinaryTreeNode<E>, ?> process) {
     if (curr == null) {
       return;
     }
 
     inOrder(curr.left, process);
-    process.apply(curr.val);
+    process.apply(curr);
     inOrder(curr.right, process);
   }
 
-  public void inOrder(Function<E, ?> process) {
+  public void inOrder(Function<BinaryTreeNode<E>, ?> process) {
     inOrder(root, process);
   }
 
-  public void outOrder(BinaryTreeNode<E> curr, Function<E, ?> process) {
+  public void outOrder(BinaryTreeNode<E> curr, Function<BinaryTreeNode<E>, ?> process) {
     if (curr == null) {
       return;
     }
 
     outOrder(curr.right, process);
-    process.apply(curr.val);
+    process.apply(curr);
     outOrder(curr.left, process);
   }
 
-  public void outOrder(Function<E, ?> process) {
+  public void outOrder(Function<BinaryTreeNode<E>, ?> process) {
     outOrder(root, process);
   }
 
-  public void postOrder(BinaryTreeNode<E> curr, Function<E, ?> process) {
+  public void postOrder(BinaryTreeNode<E> curr, Function<BinaryTreeNode<E>, ?> process) {
     if (curr == null) {
       return;
     }
 
     postOrder(curr.left, process);
     postOrder(curr.right, process);
-    process.apply(curr.val);
+    process.apply(curr);
   }
 
-  public void postOrder(Function<E, ?> process) {
+  public void postOrder(Function<BinaryTreeNode<E>, ?> process) {
     postOrder(root, process);
   }
 
-  public void breadthFirst(Function<E, ?> process) {
+  public void breadthFirst(Function<BinaryTreeNode<E>, ?> process) {
     Queue<BinaryTreeNode<E>> queue = new Queue<>();
     queue.enqueue(root);
 
     while (!queue.isEmpty()) {
       BinaryTreeNode<E> curr = queue.dequeue();
-      process.apply(curr.val);
+      process.apply(curr);
 
       if (curr.left != null) {
         queue.enqueue(curr.left);
@@ -128,13 +152,13 @@ public class BinaryTree<E extends Comparable<E>> {
 
     while (curr != null) {
       prev = curr;
-      curr = val.compareTo(curr.val) < 0
+      curr = val.compareTo(curr.getVal()) < 0
         ? curr.left
         : curr.right;
     }
 
     if (prev != null) {
-      if (val.compareTo(prev.val) < 0) {
+      if (val.compareTo(prev.getVal()) < 0) {
         prev.left = new BinaryTreeNode<>(val);
       } else {
         prev.right = new BinaryTreeNode<>(val);
@@ -148,7 +172,7 @@ public class BinaryTree<E extends Comparable<E>> {
     BinaryTreeNode<E> curr = root;
 
     while (curr != null) {
-      int compRes = val.compareTo(curr.val);
+      int compRes = val.compareTo(curr.getVal());
 
       if (compRes == 0) {
         return curr;
