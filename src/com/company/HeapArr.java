@@ -1,7 +1,6 @@
 package com.company;
 
-public class Heap<E> {
-
+public class HeapArr<E> {
 
 
 
