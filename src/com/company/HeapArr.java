@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 public class HeapArr<E> extends ArrStruct<E> {
 
-  private Comparator<E> comp;
+  private Comparator<? super E> comp;
   private int len;
 
   //     0
@@ -27,7 +27,7 @@ public class HeapArr<E> extends ArrStruct<E> {
    * heap class acts like a MaxHeap on the comparator results.
    */
 
-  public HeapArr(E[] container, Comparator<E> comp) {
+  public HeapArr(E[] container, Comparator<? super E> comp) {
     super(container);
     this.comp = comp;
     this.len = container.length;
@@ -35,7 +35,7 @@ public class HeapArr<E> extends ArrStruct<E> {
     heapify();
   }
 
-  public HeapArr(Class<E> cls, int capacity, Comparator<E> comp) {
+  public HeapArr(Class<E> cls, int capacity, Comparator<? super E> comp) {
     super(cls, capacity);
     this.comp = comp;
     this.len = 0;
