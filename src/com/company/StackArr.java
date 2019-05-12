@@ -7,25 +7,23 @@ import javax.management.RuntimeErrorException;
 import java.lang.StackOverflowError;
 import java.lang.RuntimeException;
 
-public class StackArr<E> {
+public class StackArr<E> extends ArrStruct<E> {
 
-  private E[] container;
   private int top; // top is the idx of the cell to write to. the most recent push is at top - 1
-  private int capacity;
+
+  public StackArr(E[] container) {
+    super(container);
+    this.top = 0;
+  }
 
   public StackArr(Class<E> cls, int capacity) {
-    // refer to https://stackoverflow.com/questions/529085/how-to-create-a-generic-array-in-java
-    @SuppressWarnings("unchecked")
-    final E[] container = (E[]) Array.newInstance(cls, capacity);
-    this.container = container;
-
+    super(cls, capacity);
     this.top = 0;
-    this.capacity = capacity;
   }
 
   public void push(E val) throws StackOverflowError {
     if (isFull()) {
-      throw new StackOverflowError("StackArr exceeds capacity of " + capacity);
+      throw new StackOverflowError("StackArr exceeds capacity of " + getCapacity());
     }
 
     container[top++] = val;
@@ -71,7 +69,7 @@ public class StackArr<E> {
   }
 
   public boolean isFull() {
-    return top >= capacity;
+    return top >= getCapacity();
   }
 
 }
