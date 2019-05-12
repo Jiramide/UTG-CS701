@@ -1,7 +1,7 @@
 package com.company;
 
 import java.lang.Comparable;
-import java.util.function.Function;
+import java.util.function.Consumer;
 
 class BinaryTreeNode<E> {
 
@@ -67,69 +67,69 @@ public class BinaryTree<E extends Comparable<E>> {
   // out-order: RNL
   // postorder: LRN
 
-  public void preOrder(BinaryTreeNode<E> curr, Function<BinaryTreeNode<E>, ?> process) {
+  public void preOrder(BinaryTreeNode<E> curr, Consumer<E> process) {
     if (curr == null) {
       return;
     }
 
-    process.apply(curr);
+    process.accept(curr.val);
     preOrder(curr.left, process);
     preOrder(curr.right, process);
   }
 
-  public void preOrder(Function<BinaryTreeNode<E>, ?> process) {
+  public void preOrder(Consumer<E> process) {
     preOrder(root, process);
   }
 
-  public void inOrder(BinaryTreeNode<E> curr, Function<BinaryTreeNode<E>, ?> process) {
+  public void inOrder(BinaryTreeNode<E> curr, Consumer<E> process) {
     if (curr == null) {
       return;
     }
 
     inOrder(curr.left, process);
-    process.apply(curr);
+    process.accept(curr.val);
     inOrder(curr.right, process);
   }
 
-  public void inOrder(Function<BinaryTreeNode<E>, ?> process) {
+  public void inOrder(Consumer<E> process) {
     inOrder(root, process);
   }
 
-  public void outOrder(BinaryTreeNode<E> curr, Function<BinaryTreeNode<E>, ?> process) {
+  public void outOrder(BinaryTreeNode<E> curr, Consumer<E> process) {
     if (curr == null) {
       return;
     }
 
     outOrder(curr.right, process);
-    process.apply(curr);
+    process.accept(curr.val);
     outOrder(curr.left, process);
   }
 
-  public void outOrder(Function<BinaryTreeNode<E>, ?> process) {
+  public void outOrder(Consumer<E> process) {
     outOrder(root, process);
   }
 
-  public void postOrder(BinaryTreeNode<E> curr, Function<BinaryTreeNode<E>, ?> process) {
+  public void postOrder(BinaryTreeNode<E> curr, Consumer<E> process) {
     if (curr == null) {
       return;
     }
 
     postOrder(curr.left, process);
     postOrder(curr.right, process);
-    process.apply(curr);
+    process.accept(curr.val);
   }
 
-  public void postOrder(Function<BinaryTreeNode<E>, ?> process) {
+  public void postOrder(Consumer<E> process) {
     postOrder(root, process);
   }
 
-  public void breadthFirst(Function<BinaryTreeNode<E>, ?> process) {
+  public void breadthFirst(Consumer<E> process) {
     Queue<BinaryTreeNode<E>> queue = new Queue<>();
     queue.enqueue(root);
 
     while (!queue.isEmpty()) {
       BinaryTreeNode<E> curr = queue.dequeue();
-      process.apply(curr);
+      process.accept(curr.val);
 
       if (curr.left != null) {
         queue.enqueue(curr.left);
