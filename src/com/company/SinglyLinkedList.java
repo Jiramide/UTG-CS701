@@ -89,7 +89,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @throws IndexOutOfBoundsException If idx is not a valid index.
    * @see SinglyLinkedList.safeIndexNode
    */
-  protected SinglyLinkedNode<E> indexNode(int idx) {
+  protected SinglyLinkedNode<E> indexNode(int idx) throws IndexOutOfBoundsException {
     if (!validIndex(idx)) {
       throw new IndexOutOfBoundsException("Cannot index element #" + idx + " in SinglyLinkedList.");
     }
@@ -122,7 +122,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @throws IndexOutOfBoundsException If idx is not a valid index.
    * @see SinglyLinkedList.safeIndex
    */
-  public E index(int idx) {
+  public E index(int idx) throws IndexOutOfBoundsException {
     return indexNode(idx).val;
   }
 
@@ -154,7 +154,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @throws IndexOutOfBoundsException If idx is not a valid index.
    * @see SinglyLinkedList.addNodeAfter
    */
-  private void addNodeBefore(SinglyLinkedNode<E> node, int idx) {
+  private void addNodeBefore(SinglyLinkedNode<E> node, int idx) throws IndexOutOfBoundsException {
     if (idx == 0) {
       node.next = head;
       head = node;
@@ -174,7 +174,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @throws IndexOutOfBoundsException If idx is not a valid index.
    * @see SinglyLinkedList.addNodeBefore
    */
-  private void addNodeAfter(SinglyLinkedNode<E> node, int idx) {
+  private void addNodeAfter(SinglyLinkedNode<E> node, int idx) throws IndexOutOfBoundsException {
     SinglyLinkedNode<E> before = indexNode(idx);
 
     node.next = before.next;
@@ -190,7 +190,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @throws IndexOutOfBoundsException If idx is not a valid index.
    * @see SinglyLinkedList.addAfter
    */
-  public void addBefore(E val, int idx) {
+  public void addBefore(E val, int idx) throws IndexOutOfBoundsException {
     addNodeBefore(new SinglyLinkedNode<>(val), idx);
   }
 
@@ -201,7 +201,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @throws IndexOutOfBoundsException If idx is not a valid index.
    * @see SinglyLinkedList.addBefore
    */
-  public void addAfter(E val, int idx) {
+  public void addAfter(E val, int idx) throws IndexOutOfBoundsException {
     addNodeAfter(new SinglyLinkedNode<>(val), idx);
   }
 
@@ -224,7 +224,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @throws IndexOutOfBoundsException If idx is not a valid index.
    * @see SinglyLinkedList.safeRemove
    */
-  public E remove(int idx) {
+  public E remove(int idx) throws IndexOutOfBoundsException {
     if (!validIndex(idx)) {
       throw new IndexOutOfBoundsException("Cannot remove element #" + idx + " from SinglyLinkedList.");
     }
@@ -269,7 +269,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @throws IndexOutBoundsException If the collection is empty.
    * @see SinglyLinkedList.safeUncons
    */
-  public E uncons() {
+  public E uncons() throws IndexOutOfBoundsException {
     return remove(0);
   }
 
@@ -290,7 +290,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @throws IndexOutOfBoundsException If the collection is empty.
    * @see SinglyLinkedList.safePeek
    */
-  public E peek() {
+  public E peek() throws IndexOutOfBoundsException {
     return index(0);
   }
 
