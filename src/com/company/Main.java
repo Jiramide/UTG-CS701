@@ -194,6 +194,23 @@ public class Main {
     System.out.println("Breadth first");
     tree.breadthFirst(x -> {System.out.println(x); return 0;});
 
+    System.out.println("StackArr");
+    Integer[] stackContainer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    StackArr<Integer> stack = new StackArr<>(stackContainer);
+
+    while (!stack.isEmpty()) {
+      System.out.println(stack.pop());
+    }
+
+    stack.resize(20);
+    for (int idx = 0; idx < 20; idx++) {
+      stack.push(idx);
+    }
+
+    while (!stack.isEmpty()) {
+      System.out.println(stack.pop());
+    }
+
     System.out.println("QueueArr");
     Integer[] queueContainer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     QueueArr<Integer> queue = new QueueArr<>(queueContainer);
