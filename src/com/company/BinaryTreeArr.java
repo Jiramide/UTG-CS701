@@ -112,7 +112,7 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
       }
 
       curr = compRes < 0
-        : getLeftChildIdx(curr)
+        ? getLeftChildIdx(curr)
         : getRightChildIdx(curr);
     }
 
