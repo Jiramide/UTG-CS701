@@ -130,8 +130,9 @@ public class HeapArr<E> extends ArrStruct<E> {
 
   public E pop() {
     E toPop = container[0];
-    swap(container, 0, len - 1);
     len -= 1;
+    swap(container, 0, len);
+    container[len] = null;
     siftDown(0);
 
     return toPop;
