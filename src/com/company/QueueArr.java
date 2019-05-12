@@ -7,20 +7,17 @@ public class QueueArr<E> extends ArrStruct<E> {
 
   private int enqueueIdx; // points to the idx to write
   private int dequeueIdx; // points to the idx to read
-  private int capacity;
 
   public QueueArr(E[] container) {
     super(container);
-    this.enqueueIdx = 0;
+    this.enqueueIdx = container.length;
     this.dequeueIdx = 0;
-    this.capacity = container.length;
   }
 
   public QueueArr(Class<E> cls, int capacity) {
     super(cls, capacity);
     this.enqueueIdx = 0;
     this.dequeueIdx = 0;
-    this.capacity = capacity;
   }
 
   public void enqueue(E val) throws RuntimeException {
@@ -28,7 +25,7 @@ public class QueueArr<E> extends ArrStruct<E> {
       throw new RuntimeException("QueueArr: queue overflow");
     }
 
-    container[enqueueIdx++ % capacity] = val;
+    container[enqueueIdx++ % getCapacity()] = val;
   }
 
   public E dequeue() throws RuntimeException {
@@ -36,8 +33,9 @@ public class QueueArr<E> extends ArrStruct<E> {
       throw new RuntimeException("QueueArr: queue underflow");
     }
 
+    int capacity = getCapacity();
     E ret = container[dequeueIdx++ % capacity];
-    container[dequeueIdx % capacity] = null;
+    container[(dequeueIdx - 1) % capacity] = null;
 
     return ret;
   }
@@ -53,7 +51,7 @@ public class QueueArr<E> extends ArrStruct<E> {
       throw new RuntimeException("QueueArr: queue underflow");
     }
 
-    return container[dequeueIdx % capacity];
+    return container[dequeueIdx % getCapacity()];
   }
 
   public Option<E> safePeek() {
@@ -71,7 +69,7 @@ public class QueueArr<E> extends ArrStruct<E> {
   }
 
   public boolean isFull() {
-    return numItems() >= capacity;
+    return numItems() >= getCapacity();
   }
 
 }
