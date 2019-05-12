@@ -211,6 +211,15 @@ public class Main {
       System.out.println(heap.pop());
     }
 
+    heap.resize(20);
+    for (int idx = 0; idx < 20; idx++) {
+      heap.push(idx);
+    }
+
+    while (!heap.isEmpty()) {
+      System.out.println(heap.pop());
+    }
+
 
   }
 
