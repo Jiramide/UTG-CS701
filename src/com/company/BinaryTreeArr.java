@@ -90,4 +90,33 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
     }
   }
 
+  public void insert(E val) {
+    int curr = 0;
+    while (container[curr] != null) {
+      curr = comp.compare(val, container[curr]) < 0
+        ? getLeftChildIdx(curr)
+        : getRightChildIdx(curr);
+    }
+
+    container[curr] = val;
+  }
+
+  public boolean member(E val) {
+    int curr = 0;
+
+    while (container[curr] != null) {
+      int compRes = comp.compare(val, container[curr]);
+
+      if (compRes == 0) {
+        return true;
+      }
+
+      curr = compRes < 0
+        : getLeftChildIdx(curr)
+        : getRightChildIdx(curr);
+    }
+
+    return false;
+  }
+
 }
