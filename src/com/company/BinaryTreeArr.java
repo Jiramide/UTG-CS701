@@ -43,6 +43,10 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
   // postorder: LRN
 
   public void preOrder(int curr, Consumer<E> process) {
+    if (container[curr] == null) {
+      return;
+    }
+
     process.accept(container[curr]);
     preOrder(getLeftChildIdx(curr), process);
     preOrder(getRightChildIdx(curr), process);
@@ -53,6 +57,10 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
   }
 
   public void inOrder(int curr, Consumer<E> process) {
+    if (container[curr] == null) {
+      return;
+    }
+
     inOrder(getLeftChildIdx(curr), process);
     process.accept(container[curr]);
     inOrder(getRightChildIdx(curr), process);
@@ -63,6 +71,10 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
   }
 
   public void outOrder(int curr, Consumer<E> process) {
+    if (container[curr] == null) {
+      return;
+    }
+
     outOrder(getRightChildIdx(curr), process);
     process.accept(container[curr]);
     outOrder(getLeftChildIdx(curr), process);
@@ -73,6 +85,10 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
   }
 
   public void postOrder(int curr, Consumer<E> process) {
+    if (container[curr] == null) {
+      return;
+    }
+
     postOrder(getLeftChildIdx(curr), process);
     postOrder(getRightChildIdx(curr), process);
     process.accept(container[curr]);
