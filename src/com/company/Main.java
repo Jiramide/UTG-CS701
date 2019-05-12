@@ -202,6 +202,14 @@ public class Main {
       System.out.println(heap.pop());
     }
 
+    Integer[] heapContainer2 = {1, 8, 0, 9, 4, 2, 6, 3, 7, 5, 10};
+    for (Integer i : heapContainer2) {
+      heap.push(i);
+    }
+
+    while (!heap.isEmpty()) {
+      System.out.println(heap.pop());
+    }
 
 
   }

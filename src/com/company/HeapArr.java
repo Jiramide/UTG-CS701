@@ -15,18 +15,18 @@ public class HeapArr<E> {
   //  /\   /\
   // 3  4 5  6
 
-  /*
-  * This HeapArr class generalizes the notion of a heap
-  * and allows for custom ordering via the use of Comparator.
-  *
-  * This class satisfies the heap property in such a way such that
-  * forall parent.
-  *   comparator.compare(parent, leftChild(parent)) > 0 and
-  *   comparator.compare(parent, rightChild(parent)) > 0
-  *
-  * If the comparator is thought of as a map from E^2 -> R, then this
-  * heap class acts like a MaxHeap on the comparator results.
-  * */
+  /**
+   * This HeapArr class generalizes the notion of a heap
+   * and allows for custom ordering via the use of Comparator.
+   *
+   * This class satisfies the heap property in such a way such that
+   * forall parent.
+   *   comparator.compare(parent, leftChild(parent)) > 0 and
+   *   comparator.compare(parent, rightChild(parent)) > 0
+   *
+   * If the comparator is thought of as a map from E^2 -> R, then this
+   * heap class acts like a MaxHeap on the comparator results.
+   */
 
   public HeapArr(Class<E> cls, int capacity, Comparator<E> comp) {
     // refer to https://stackoverflow.com/questions/529085/how-to-create-a-generic-array-in-java
@@ -133,8 +133,25 @@ public class HeapArr<E> {
     return toPop;
   }
 
-  public void push(E val) {
+  public Option<E> safePop() {
+    return !isEmpty()
+      ? new Option<>(pop());
+      : new Option<>();
+  }
 
+  public E peek() {
+    return container[0];
+  }
+
+  public Option<E> safePeek() {
+    return !isEmpty()
+      ? new Option<>(peek())
+      : new Option<>();
+  }
+
+  public void push(E val) {
+    container[len++] = val;
+    siftUp(len - 1);
   }
 
 }
