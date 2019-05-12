@@ -29,8 +29,6 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
     return 2*parent + 1;
   }
 
-
-
   private int getRightChildIdx(int parent) {
     return 2*parent + 2;
   }
@@ -48,6 +46,40 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
     process.accept(container[curr]);
     preOrder(getLeftChildIdx(curr), process);
     preOrder(getRightChildIdx(curr), process);
+  }
+
+  public void preOrder(Consumer<E> process) {
+    preOrder(0, process);
+  }
+
+  public void inOrder(int curr, Consumer<E> process) {
+    inOrder(getLeftChildIdx(curr), process);
+    process.accept(container[curr]);
+    inOrder(getRightChildIdx(curr), process);
+  }
+
+  public void inOrder(Consumer<E> process) {
+    inOrder(0, process);
+  }
+
+  public void outOrder(int curr, Consumer<E> process) {
+    outOrder(getRightChildIdx(curr), process);
+    process.accept(container[curr]);
+    outOrder(getLeftChildIdx(curr), process);
+  }
+
+  public void outOrder(Consumer<E> process) {
+    outOrder(0, process);
+  }
+
+  public void postOrder(int curr, Consumer<E> process) {
+    postOrder(getLeftChildIdx(curr), process);
+    postOrder(getRightChildIdx(curr), process);
+    process.accept(container[curr]);
+  }
+
+  public void postOrder(Consumer<E> process) {
+    postOrder(0, process);
   }
 
 }
