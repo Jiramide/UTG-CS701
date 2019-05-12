@@ -13,7 +13,7 @@ public class StackArr<E> extends ArrStruct<E> {
 
   public StackArr(E[] container) {
     super(container);
-    this.top = 0;
+    this.top = container.length;
   }
 
   public StackArr(Class<E> cls, int capacity) {
