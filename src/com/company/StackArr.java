@@ -1,9 +1,6 @@
 package com.company;
 
 import java.lang.reflect.Array;
-
-import javax.management.RuntimeErrorException;
-
 import java.lang.StackOverflowError;
 import java.lang.RuntimeException;
 
@@ -29,7 +26,7 @@ public class StackArr<E> extends ArrStruct<E> {
     container[top++] = val;
   }
 
-  public E pop() throws RuntimeErrorException {
+  public E pop() throws RuntimeException {
     if (isEmpty()) {
       throw new RuntimeException("StackArr: stack underflow");
     }
@@ -46,7 +43,7 @@ public class StackArr<E> extends ArrStruct<E> {
       : new Option<>();
   }
 
-  public E peek() throws RuntimeErrorException {
+  public E peek() throws RuntimeException {
     if (isEmpty()) {
       throw new RuntimeException("StackArr: stack underflow");
     }
