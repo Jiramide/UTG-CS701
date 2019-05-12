@@ -100,24 +100,12 @@ public class HeapArr<E> extends ArrStruct<E> {
     return 2*parent + 1;
   }
 
-  private E getLeftChild(int parent) {
-    return container[getLeftChildIdx(parent)];
-  }
-
   private int getRightChildIdx(int parent) {
     return 2*parent + 2;
   }
 
-  private E getRightChild(int parent) {
-    return container[getRightChildIdx(parent)];
-  }
-
   private int getParentIdx(int child) {
     return (int)Math.floor((child - 1)/2);
-  }
-
-  private E getParent(int child) {
-    return container[getParentIdx(child)];
   }
 
   public int length() {
