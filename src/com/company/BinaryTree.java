@@ -72,7 +72,7 @@ public class BinaryTree<E extends Comparable<E>> {
       return;
     }
 
-    process.accept(curr.val);
+    process.accept(curr.getVal());
     preOrder(curr.left, process);
     preOrder(curr.right, process);
   }
@@ -87,7 +87,7 @@ public class BinaryTree<E extends Comparable<E>> {
     }
 
     inOrder(curr.left, process);
-    process.accept(curr.val);
+    process.accept(curr.getVal());
     inOrder(curr.right, process);
   }
 
@@ -101,7 +101,7 @@ public class BinaryTree<E extends Comparable<E>> {
     }
 
     outOrder(curr.right, process);
-    process.accept(curr.val);
+    process.accept(curr.getVal());
     outOrder(curr.left, process);
   }
 
@@ -116,7 +116,7 @@ public class BinaryTree<E extends Comparable<E>> {
 
     postOrder(curr.left, process);
     postOrder(curr.right, process);
-    process.accept(curr.val);
+    process.accept(curr.getVal());
   }
 
   public void postOrder(Consumer<E> process) {
@@ -129,7 +129,7 @@ public class BinaryTree<E extends Comparable<E>> {
 
     while (!queue.isEmpty()) {
       BinaryTreeNode<E> curr = queue.dequeue();
-      process.accept(curr.val);
+      process.accept(curr.getVal());
 
       if (curr.left != null) {
         queue.enqueue(curr.left);
