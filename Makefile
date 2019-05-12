@@ -5,6 +5,7 @@ PKG_DIR := com/company
 
 CLASSES := pkg/ArrStruct.class \
 	pkg/BinaryTree.class \
+	pkg/BinaryTreeArr.class \
 	pkg/BubbleSort.class \
 	pkg/DisjointSet.class \
 	pkg/DoublyLinkedList.class \
