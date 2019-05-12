@@ -3,9 +3,8 @@ package com.company;
 import java.lang.reflect.Array;
 import java.util.Comparator;
 
-public class HeapArr<E> {
+public class HeapArr<E> extends ArrStruct {
 
-  private E[] container;
   private Comparator<E> comp;
   private int len;
 
@@ -28,22 +27,16 @@ public class HeapArr<E> {
    * heap class acts like a MaxHeap on the comparator results.
    */
 
-  public HeapArr(Class<E> cls, int capacity, Comparator<E> comp) {
-    // refer to https://stackoverflow.com/questions/529085/how-to-create-a-generic-array-in-java
-    @SuppressWarnings("unchecked")
-    final E[] container = (E[]) Array.newInstance(cls, capacity);
-    this.container = container;
-
-    this.comp = comp;
-    this.len = 0;
-  }
-
   public HeapArr(E[] container, Comparator<E> comp) {
-    this.container = container;
+    super(container);
     this.comp = comp;
     this.len = container.length;
+  }
 
-    heapify();
+  public HeapArr(Class<E> cls, int capacity, Comparator<E> comp) {
+    super(cls, capacity);
+    this.comp = comp;
+    this.len = 0;
   }
 
   private void heapify() {
