@@ -1,6 +1,7 @@
 package com.company;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public abstract class ArrStruct<E> {
 
@@ -15,6 +16,14 @@ public abstract class ArrStruct<E> {
     @SuppressWarnings("unchecked")
     final E[] container = (E[]) Array.newInstance(cls, capacity);
     this.container = container;
+  }
+
+  private int getCapacity() {
+    return container.length;
+  }
+
+  public void resize(int newCapacity) {
+    container = Arrays.copyOf(container, newCapacity);
   }
 
 }
