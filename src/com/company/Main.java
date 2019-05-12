@@ -194,7 +194,24 @@ public class Main {
     System.out.println("Breadth first");
     tree.breadthFirst(x -> {System.out.println(x); return 0;});
 
-    System.out.println("Heap");
+    System.out.println("QueueArr");
+    Integer[] queueContainer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    QueueArr<Integer> queue = new QueueArr<>(queueContainer);
+
+    while (!queue.isEmpty()) {
+      System.out.println(queue.dequeue());
+    }
+
+    queue.resize(20);
+    for (int idx = 0; idx < 20; idx++) {
+      queue.enqueue(idx);
+    }
+
+    while (!queue.isEmpty()) {
+      System.out.println(queue.dequeue());
+    }
+
+    System.out.println("HeapArr");
     Integer[] heapContainer = {5, 8, 1, 0, 7, 2, 9, 10, 6, 3, 4};
     HeapArr<Integer> heap = new HeapArr<>(heapContainer, (x, y) -> x - y);
 
