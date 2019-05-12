@@ -1,6 +1,9 @@
 package com.company;
 
 import java.lang.reflect.Array;
+
+import javax.management.RuntimeErrorException;
+
 import java.lang.StackOverflowError;
 import java.lang.RuntimeException;
 
@@ -20,7 +23,7 @@ public class StackArr<E> {
     this.capacity = capacity;
   }
 
-  public void push(E val) {
+  public void push(E val) throws StackOverflowError {
     if (isFull()) {
       throw new StackOverflowError("StackArr exceeds capacity of " + capacity);
     }
@@ -28,7 +31,7 @@ public class StackArr<E> {
     container[top++] = val;
   }
 
-  public E pop() {
+  public E pop() throws RuntimeErrorException {
     if (isEmpty()) {
       throw new RuntimeException("StackArr: stack underflow");
     }
@@ -45,7 +48,7 @@ public class StackArr<E> {
       : new Option<>();
   }
 
-  public E peek() {
+  public E peek() throws RuntimeErrorException {
     if (isEmpty()) {
       throw new RuntimeException("StackArr: stack underflow");
     }
