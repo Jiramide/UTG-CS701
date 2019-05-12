@@ -18,7 +18,7 @@ public abstract class ArrStruct<E> {
     this.container = container;
   }
 
-  private int getCapacity() {
+  int getCapacity() {
     return container.length;
   }
 
