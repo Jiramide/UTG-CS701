@@ -42,11 +42,11 @@ public class HeapArr<E> extends ArrStruct<E> {
     this.len = 0;
   }
 
-  public <E extends Comparable<E>> static HeapArr<E> withComparable(E[] container) {
+  public static <E extends Comparable<E>> HeapArr<E> withComparable(E[] container) {
     return new HeapArr<>(container, (x, y) -> x.compareTo(y));
   }
 
-  public <E extends Comparable<E>> static HeapArr<E> withComparable(Class<E> cls, int capacity) {
+  public static <E extends Comparable<E>> HeapArr<E> withComparable(Class<E> cls, int capacity) {
     return new HeapArr<>(cls, capacity, (x, y) -> x.compareTo(y));
   }
 
