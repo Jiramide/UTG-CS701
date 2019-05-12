@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public abstract class ArrStruct<E> {
 
-  private E[] container;
+  E[] container;
 
   public ArrStruct(E[] container) {
     this.container = container;
