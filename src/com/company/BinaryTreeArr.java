@@ -82,4 +82,12 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
     postOrder(0, process);
   }
 
+  public void breadthFirst(Consumer<E> process) {
+    for (int idx = 0; idx < getCapacity(); idx++) {
+      if (container[idx] != null) {
+        process.accept(container[idx]);
+      }
+    }
+  }
+
 }
