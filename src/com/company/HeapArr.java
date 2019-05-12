@@ -3,7 +3,7 @@ package com.company;
 import java.lang.reflect.Array;
 import java.util.Comparator;
 
-public class HeapArr<E> extends ArrStruct {
+public class HeapArr<E> extends ArrStruct<E> {
 
   private Comparator<E> comp;
   private int len;
@@ -31,6 +31,8 @@ public class HeapArr<E> extends ArrStruct {
     super(container);
     this.comp = comp;
     this.len = container.length;
+
+    heapify();
   }
 
   public HeapArr(Class<E> cls, int capacity, Comparator<E> comp) {
@@ -128,7 +130,7 @@ public class HeapArr<E> extends ArrStruct {
 
   public Option<E> safePop() {
     return !isEmpty()
-      ? new Option<>(pop());
+      ? new Option<>(pop())
       : new Option<>();
   }
 
