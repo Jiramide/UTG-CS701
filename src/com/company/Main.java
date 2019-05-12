@@ -194,6 +194,16 @@ public class Main {
     System.out.println("Breadth first");
     tree.breadthFirst(x -> {System.out.println(x); return 0;});
 
+    System.out.println("Heap");
+    Integer[] heapContainer = {5, 8, 1, 0, 7, 2, 9, 10, 6, 3, 4};
+    HeapArr<Integer> heap = new HeapArr<>(heapContainer, (x, y) -> x - y);
+
+    while (!heap.isEmpty()) {
+      System.out.println(heap.pop());
+    }
+
+
+
   }
 
 }
