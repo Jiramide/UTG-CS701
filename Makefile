@@ -3,21 +3,24 @@
 EXTRA_COMPILER_ARGS := -Xlint
 PKG_DIR := com/company
 
-CLASSES := pkg/Option.class \
+CLASSES := pkg/ArrStruct.class \
+	pkg/BinaryTree.class \
+	pkg/BubbleSort.class \
+	pkg/DisjointSet.class \
 	pkg/DoublyLinkedList.class \
+	pkg/Heap.class \
+	pkg/HeapArr.class \
+	pkg/MergeSort.class \
+	pkg/Option.class \
+	pkg/ParenthesizedString.class \
+	pkg/PascalTriangle.class \
 	pkg/Queue.class \
 	pkg/QueueArr.class \
+	pkg/QuickSort.class \
+	pkg/SelectionSort.class \
 	pkg/SinglyLinkedList.class \
 	pkg/Stack.class \
-	pkg/StackArr.class \
-	pkg/ParenthesizedString.class \
-	pkg/DisjointSet.class \
-	pkg/BubbleSort.class \
-	pkg/SelectionSort.class \
-	pkg/QuickSort.class \
-	pkg/MergeSort.class \
-	pkg/PascalTriangle.class \
-	pkg/BinaryTree.class
+	pkg/StackArr.class
 
 out/$(PKG_DIR)/Main.java : src/$(PKG_DIR)/Main.java $(subst pkg/,out/$(PKG_DIR)/,$(CLASSES))
 	javac $(EXTRA_COMPILER_ARGS) -d out -cp src src/$(PKG_DIR)/Main.java
