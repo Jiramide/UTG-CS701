@@ -3,25 +3,27 @@ package com.company;
 import java.lang.reflect.Array;
 import java.lang.RuntimeException;
 
-public class QueueArr<E> {
+public class QueueArr<E> extends ArrStruct<E> {
 
-  private E[] container;
   private int enqueueIdx; // points to the idx to write
   private int dequeueIdx; // points to the idx to read
   private int capacity;
 
-  public QueueArr(Class<E> cls, int capacity) {
-    // refer to https://stackoverflow.com/questions/529085/how-to-create-a-generic-array-in-java
-    @SuppressWarnings("unchecked")
-    final E[] container = (E[]) Array.newInstance(cls, capacity);
-    this.container = container;
+  public QueueArr(E[] container) {
+    super(container);
+    this.enqueueIdx = 0;
+    this.dequeueIdx = 0;
+    this.capacity = container.length;
+  }
 
+  public QueueArr(Class<E> cls, int capacity) {
+    super(cls, capacity);
     this.enqueueIdx = 0;
     this.dequeueIdx = 0;
     this.capacity = capacity;
   }
 
-  public void enqueue(E val) {
+  public void enqueue(E val) throws RuntimeException {
     if (isFull()) {
       throw new RuntimeException("QueueArr: queue overflow");
     }
@@ -29,7 +31,7 @@ public class QueueArr<E> {
     container[enqueueIdx++ % capacity] = val;
   }
 
-  public E dequeue() {
+  public E dequeue() throws RuntimeException {
     if (isEmpty()) {
       throw new RuntimeException("QueueArr: queue underflow");
     }
@@ -46,7 +48,7 @@ public class QueueArr<E> {
       : new Option<>();
   }
 
-  public E peek() {
+  public E peek() throws RuntimeException {
     if (isEmpty()) {
       throw new RuntimeException("QueueArr: queue underflow");
     }
