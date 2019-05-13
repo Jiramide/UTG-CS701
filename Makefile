@@ -1,6 +1,6 @@
 .PHONY: execute clean
 
-EXTRA_COMPILER_ARGS := -Xlint
+EXTRA_COMPILER_ARGS := -Xlint -Xdiags:verbose
 PKG_DIR := com/company
 
 CLASSES := pkg/ArrStruct.class \
