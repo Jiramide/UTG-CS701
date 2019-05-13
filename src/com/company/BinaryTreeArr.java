@@ -5,14 +5,14 @@ import java.util.function.Consumer;
 
 public class BinaryTreeArr<E> extends ArrStruct<E> {
 
-  private Comparator<? extends E> comp;
+  private Comparator<? super E> comp;
 
-  public BinaryTreeArr(E[] container, Comparator<? extends E> comp) {
+  public BinaryTreeArr(E[] container, Comparator<? super E> comp) {
     super(container);
     this.comp = comp;
   }
 
-  public BinaryTreeArr(Class<E> cls, int capacity, Comparator<? extends E> comp) {
+  public BinaryTreeArr(Class<E> cls, int capacity, Comparator<? super E> comp) {
     super(cls, capacity);
     this.comp = comp;
   }
