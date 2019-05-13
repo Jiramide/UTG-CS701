@@ -180,19 +180,19 @@ public class Main {
           tree.insert(10);
 
     System.out.println("Preorder");
-    tree.preOrder(x -> {System.out.println(x); return 0;});
+    tree.preOrder(System.out::println);
 
     System.out.println("In-order");
-    tree.inOrder(x -> {System.out.println(x); return 0;});
+    tree.inOrder(System.out::println);
 
     System.out.println("Out-order");
-    tree.outOrder(x -> {System.out.println(x); return 0;});
+    tree.outOrder(System.out::println);
 
     System.out.println("Postorder");
-    tree.postOrder(x -> {System.out.println(x); return 0;});
+    tree.postOrder(System.out::println);
 
     System.out.println("Breadth first");
-    tree.breadthFirst(x -> {System.out.println(x); return 0;});
+    tree.breadthFirst(System.out::println);
 
     System.out.println("StackArr");
     Integer[] stackContainer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
