@@ -1,7 +1,6 @@
 package com.company;
 
 import java.util.Comparator;
-import java.lang.Comparable;
 
 class HeapNode<E> {
 
@@ -33,6 +32,16 @@ class HeapNode<E> {
     node1.val = temp;
   }
 
+  static <E> void removeChild(HeapNode<E> parent, HeapNode<E> child) {
+    if (parent.left == child) {
+      parent.left = null;
+    }
+
+    if (parent.right == child) {
+      parent.right = null;
+    }
+  }
+
 }
 
 public class Heap<E> {
@@ -40,6 +49,35 @@ public class Heap<E> {
   private Comparator<? super E> comp;
   private int len;
   private HeapNode<E> root;
+/*
+  public Heap(E[] container) {
+    QueueArr<E> values = new QueueArr<>(container);
+    QueueArr<HeapNode<E>> nodes = new QueueArr<>(new Object[container.length]);
+
+    root = new HeapNode<>(values.dequeue());
+    nodes.enqueue(root);
+
+    while (values.numItems() > 1) {
+      HeapNode<E> parent = nodes.dequeue();
+      HeapNode<E> left = new HeapNode<>(values.dequeue());
+      HeapNode<E> right = new HeapNode<>(values.dequeue());
+
+      HeapNode.setAsLeft(parent, left);
+      HeapNode.setAsRight(parent, right);
+
+      nodes.enqueue(left);
+      nodes.enqueue(right);
+    }
+
+    if (!values.isEmpty()) {
+      HeapNode.setAsLeft(
+        nodes.dequeue(),
+        new HeapNode<>(values.dequeue())
+      );
+    }
+
+    heapify(root);
+  }*/
 
   private void heapify(HeapNode<E> node) {
     if (node == null) {
@@ -90,7 +128,19 @@ public class Heap<E> {
   }
 
   public E pop() {
+    E toPop = root.val;
 
+    HeapNode<E> node = root;
+    HeapNode<E> betterChild = getBetterChild(node);
+
+    while (betterChild != null) {
+      HeapNode.swap(node, betterChild);
+      node = betterChild;
+      betterChild = getBetterChild(node);
+    }
+
+    HeapNode.removeChild(node.parent, node);
+    return toPop;
   }
 
 
