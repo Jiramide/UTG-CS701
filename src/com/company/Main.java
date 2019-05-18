@@ -50,6 +50,11 @@ public class Main {
     return fib(n - 1) + fib(n - 2);
   }
 
+  public static <E> void printElem(E str) {
+    System.out.print(str.toString());
+    System.out.print(" ");
+  }
+
   public static void main(String[] args) {
 
     /*
@@ -180,27 +185,33 @@ public class Main {
           tree.insert(10);
 
     System.out.println("Preorder");
-    tree.preOrder(System.out::println);
+    tree.preOrder(Main::printElem);
+    System.out.println("");
 
     System.out.println("In-order");
-    tree.inOrder(System.out::println);
+    tree.inOrder(Main::printElem);
+    System.out.println("");
 
     System.out.println("Out-order");
-    tree.outOrder(System.out::println);
+    tree.outOrder(Main::printElem);
+    System.out.println("");
 
     System.out.println("Postorder");
-    tree.postOrder(System.out::println);
+    tree.postOrder(Main::printElem);
+    System.out.println("");
 
     System.out.println("Breadth first");
-    tree.breadthFirst(System.out::println);
+    tree.breadthFirst(Main::printElem);
+    System.out.println("");
 
     System.out.println("StackArr");
     Integer[] stackContainer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     StackArr<Integer> stack = new StackArr<>(stackContainer);
 
     while (!stack.isEmpty()) {
-      System.out.println(stack.pop());
+      Main.printElem(stack.pop());
     }
+    System.out.println("");
 
     stack.resize(20);
     for (int idx = 0; idx < 20; idx++) {
@@ -208,16 +219,18 @@ public class Main {
     }
 
     while (!stack.isEmpty()) {
-      System.out.println(stack.pop());
+      Main.printElem(stack.pop());
     }
+    System.out.println("");
 
     System.out.println("QueueArr");
     Integer[] queueContainer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     QueueArr<Integer> queue = new QueueArr<>(queueContainer);
 
     while (!queue.isEmpty()) {
-      System.out.println(queue.dequeue());
+      Main.printElem(queue.dequeue());
     }
+    System.out.println("");
 
     queue.resize(20);
     for (int idx = 0; idx < 20; idx++) {
@@ -225,16 +238,18 @@ public class Main {
     }
 
     while (!queue.isEmpty()) {
-      System.out.println(queue.dequeue());
+      Main.printElem(queue.dequeue());
     }
+    System.out.println("");
 
     System.out.println("HeapArr");
     Integer[] heapContainer = {5, 8, 1, 0, 7, 2, 9, 10, 6, 3, 4};
     HeapArr<Integer> heap = new HeapArr<>(heapContainer, (x, y) -> x - y);
 
     while (!heap.isEmpty()) {
-      System.out.println(heap.pop());
+      Main.printElem(heap.pop());
     }
+    System.out.println("");
 
     Integer[] heapContainer2 = {1, 8, 0, 9, 4, 2, 6, 3, 7, 5, 10};
     for (Integer i : heapContainer2) {
@@ -242,17 +257,26 @@ public class Main {
     }
 
     while (!heap.isEmpty()) {
-      System.out.println(heap.pop());
+      Main.printElem(heap.pop());
     }
+    System.out.println("");
 
     heap.resize(20);
     for (int idx = 0; idx < 20; idx++) {
       heap.push(idx);
     }
 
+    HeapArr<Integer> reverse = heap.reverse();
+
     while (!heap.isEmpty()) {
-      System.out.println(heap.pop());
+      Main.printElem(heap.pop());
     }
+    System.out.println("");
+
+    while (!reverse.isEmpty()) {
+      Main.printElem(reverse.pop());
+    }
+    System.out.println("");
 
 
   }
