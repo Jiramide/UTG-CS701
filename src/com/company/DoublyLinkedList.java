@@ -2,10 +2,6 @@ package com.company;
 
 import java.util.Iterator;
 import java.util.ListIterator;
-import java.lang.Iterable;
-import java.lang.StringBuilder;
-import java.lang.IndexOutOfBoundsException;
-import java.lang.UnsupportedOperationException;
 
 class DoublyLinkedNode<E> {
 

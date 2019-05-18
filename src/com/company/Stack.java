@@ -1,7 +1,5 @@
 package com.company;
 
-import java.lang.StringBuilder;
-
 public class Stack<E> {
 
   private SinglyLinkedList<E> container;

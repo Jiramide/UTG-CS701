@@ -1,6 +1,5 @@
 package com.company;
 
-import java.lang.Comparable;
 import java.util.function.Consumer;
 
 class BinaryTreeNode<E> {

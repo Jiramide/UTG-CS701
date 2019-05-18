@@ -1,7 +1,6 @@
 package com.company;
 
 import java.util.Comparator;
-import java.lang.Comparable;
 
 public class SelectionSort {
 

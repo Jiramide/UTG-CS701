@@ -1,7 +1,6 @@
 package com.company;
 
 import java.lang.reflect.Array;
-import java.lang.RuntimeException;
 
 public class QueueArr<E> extends ArrStruct<E> {
 

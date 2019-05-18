@@ -1,8 +1,6 @@
 package com.company;
 
 import java.lang.reflect.Array;
-import java.lang.StackOverflowError;
-import java.lang.RuntimeException;
 
 public class StackArr<E> extends ArrStruct<E> {
 

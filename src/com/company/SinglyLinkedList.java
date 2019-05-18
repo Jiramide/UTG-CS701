@@ -2,8 +2,6 @@ package com.company;
 
 import java.util.Iterator;
 import java.lang.Iterable;
-import java.lang.StringBuilder;
-import java.lang.IndexOutOfBoundsException;
 
 class SinglyLinkedNode<E> {
 

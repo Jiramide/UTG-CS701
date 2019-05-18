@@ -2,7 +2,6 @@ package com.company;
 
 import java.util.Scanner;
 import java.util.Set;
-import java.lang.Math;
 
 public class Main {
 

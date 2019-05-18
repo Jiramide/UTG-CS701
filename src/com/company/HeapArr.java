@@ -2,8 +2,6 @@ package com.company;
 
 import java.lang.reflect.Array;
 import java.util.Comparator;
-import java.lang.Comparable;
-import java.lang.Cloneable;
 
 public class HeapArr<E> extends ArrStruct<E> implements Cloneable {
 
