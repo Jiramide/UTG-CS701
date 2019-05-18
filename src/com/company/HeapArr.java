@@ -3,8 +3,9 @@ package com.company;
 import java.lang.reflect.Array;
 import java.util.Comparator;
 import java.lang.Comparable;
+import java.lang.Cloneable;
 
-public class HeapArr<E> extends ArrStruct<E> {
+public class HeapArr<E> extends ArrStruct<E> implements Cloneable {
 
   private Comparator<? super E> comp;
   private int len;
@@ -152,6 +153,11 @@ public class HeapArr<E> extends ArrStruct<E> {
     HeapArr<E> heapReverse = new HeapArr<>(containerClone, (x, y) -> comp.compare(y, x));
     heapReverse.heapify();
     return heapReverse;
+  }
+
+  @Override
+  public HeapArr<E> clone() {
+    return new HeapArr<>(container.clone(), comp);
   }
 
 }
