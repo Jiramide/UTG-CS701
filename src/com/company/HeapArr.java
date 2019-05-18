@@ -147,4 +147,11 @@ public class HeapArr<E> extends ArrStruct<E> {
     siftUp(len - 1);
   }
 
+  public HeapArr<E> reverse() {
+    E[] containerClone = container.clone();
+    HeapArr<E> heapReverse = new HeapArr<>(containerClone, (x, y) -> comp.compare(y, x));
+    heapReverse.heapify();
+    return heapReverse;
+  }
+
 }
