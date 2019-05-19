@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.Scanner;
 import java.util.Set;
+import com.company.datastructure.*;
 
 public class Main {
 
