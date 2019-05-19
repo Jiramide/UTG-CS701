@@ -1,4 +1,4 @@
-package com.company;
+package com.company.datastructure;
 
 import java.util.Comparator;
 
