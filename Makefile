@@ -29,14 +29,21 @@ out/$(PKG_DIR)/Main.java : src/$(PKG_DIR)/Main.java $(subst pkg/,out/$(PKG_DIR)/
 out/$(PKG_DIR)/%.class : src/$(PKG_DIR)/%.java
 	javac $(EXTRA_COMPILER_ARGS) -d out -cp src $(subst out,src,$(subst class,java,$@))
 
-out/$(PKG_DIR)/datastructure/SinglyLinkedList.class : out/$(PKG_DIR)/datastructure/Option.class
+out/$(PKG_DIR)/datastructure/*Arr.class : \
+	out/$(PKG_DIR)/datastructure/ArrStruct.class
 
-out/$(PKG_DIR)/datastructure/DoublyLinkedList.class : out/$(PKG_DIR)/datastructure/Option.class
-
-out/$(PKG_DIR)/datastructure/Stack.class : out/$(PKG_DIR)/datastructure/SinglyLinkedList.class \
+out/$(PKG_DIR)/datastructure/SinglyLinkedList.class : \
 	out/$(PKG_DIR)/datastructure/Option.class
 
-out/$(PKG_DIR)/datastructure/Queue.class : out/$(PKG_DIR)/datastructure/DoublyLinkedList.class \
+out/$(PKG_DIR)/datastructure/DoublyLinkedList.class : \
+	out/$(PKG_DIR)/datastructure/Option.class
+
+out/$(PKG_DIR)/datastructure/Stack.class : \
+	out/$(PKG_DIR)/datastructure/SinglyLinkedList.class \
+	out/$(PKG_DIR)/datastructure/Option.class
+
+out/$(PKG_DIR)/datastructure/Queue.class : \
+	out/$(PKG_DIR)/datastructure/DoublyLinkedList.class \
 	out/$(PKG_DIR)/datastructure/Option.class
 
 execute :
