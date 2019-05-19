@@ -49,12 +49,13 @@ public class Heap<E> {
   private Comparator<? super E> comp;
   private int len;
   private HeapNode<E> root;
-/*
+
   public Heap(E[] container) {
     QueueArr<E> values = new QueueArr<>(container);
-    QueueArr<HeapNode<E>> nodes = new QueueArr<>(new Object[container.length]);
+    HeapNode<E> root = new HeapNode<>(values.dequeue());
 
-    root = new HeapNode<>(values.dequeue());
+    @SuppressWarnings("unchecked")
+    QueueArr<HeapNode<E>> nodes = new QueueArr<>((Class<HeapNode<E>>)root.getClass(), container.length);
     nodes.enqueue(root);
 
     while (values.numItems() > 1) {
@@ -77,7 +78,7 @@ public class Heap<E> {
     }
 
     heapify(root);
-  }*/
+  }
 
   private void heapify(HeapNode<E> node) {
     if (node == null) {
