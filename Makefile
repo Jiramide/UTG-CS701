@@ -7,7 +7,7 @@ CLASSES := \
 	pkg/algo/BubbleSort.class \
 	pkg/algo/MergeSort.class \
 	pkg/algo/ParenthesizedString.class \
-	pkg/algo/PascalTraingle.class \
+	pkg/algo/PascalTriangle.class \
 	pkg/algo/QuickSort.class \
 	pkg/algo/SelectionSort.class \
 	pkg/datastructure/ArrStruct.class \
@@ -29,18 +29,18 @@ out/$(PKG_DIR)/Main.java : src/$(PKG_DIR)/Main.java $(subst pkg/,out/$(PKG_DIR)/
 out/$(PKG_DIR)/%.class : src/$(PKG_DIR)/%.java
 	javac $(EXTRA_COMPILER_ARGS) -d out -cp src $(subst out,src,$(subst class,java,$@))
 
-out/$(PKG_DIR)/SinglyLinkedList.class : out/$(PKG_DIR)/Option.class
+out/$(PKG_DIR)/datastructure/SinglyLinkedList.class : out/$(PKG_DIR)/datastructure/Option.class
 
-out/$(PKG_DIR)/DoublyLinkedList.class : out/$(PKG_DIR)/Option.class
+out/$(PKG_DIR)/datastructure/DoublyLinkedList.class : out/$(PKG_DIR)/datastructure/Option.class
 
-out/$(PKG_DIR)/Stack.class : out/$(PKG_DIR)/SinglyLinkedList.class \
-	out/$(PKG_DIR)/Option.class
+out/$(PKG_DIR)/datastructure/Stack.class : out/$(PKG_DIR)/datastructure/SinglyLinkedList.class \
+	out/$(PKG_DIR)/datastructure/Option.class
 
-out/$(PKG_DIR)/Queue.class : out/$(PKG_DIR)/DoublyLinkedList.class \
-	out/$(PKG_DIR)/Option.class
+out/$(PKG_DIR)/datastructure/Queue.class : out/$(PKG_DIR)/datastructure/DoublyLinkedList.class \
+	out/$(PKG_DIR)/datastructure/Option.class
 
 execute :
 	java -cp out $(subst /,.,$(PKG_DIR)).Main
 
 clean :
-	del /f out\$(subst /,\,$(PKG_DIR))\*.class
+	del /f $(subst /,\, $(subst pkg,out/$(PKG_DIR),$(CLASSES)))
