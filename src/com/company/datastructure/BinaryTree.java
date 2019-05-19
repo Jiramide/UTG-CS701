@@ -13,12 +13,25 @@ class BinaryTreeNode<E> {
     this.val = val;
   }
 
+  int height() {
+    int leftHeight = left != null
+      ? left.height()
+      : 0;
+
+    int rightHeight = right != null
+      ? right.height()
+      : 0;
+
+    return 1 + Math.max(leftHeight, rightHeight);
+  }
+
 }
 
 public class BinaryTree<E> {
 
   private BinaryTreeNode<E> root;
   private Comparator<? super E> comp;
+  private int len;
 
   public BinaryTree(Comparator<? super E> comp) {
     this.comp = comp;
@@ -38,6 +51,63 @@ public class BinaryTree<E> {
 
   public static <E extends Comparable<E>> BinaryTree<E> withComparable(Iterable<? extends E> container) {
     return new BinaryTree<>(container, (x, y) -> x.compareTo(y));
+  }
+
+  public int numItems() {
+    return len;
+  }
+
+  public boolean isEmpty() {
+    return len == 0;
+  }
+
+  public int height() {
+    return root != null
+      ? root.height()
+      : 0;
+  }
+
+  // preorder: NLR
+  // in-order: LNR
+  // out-order: RNL
+  // postorder: LRN
+
+  public void insert(E val) {
+    BinaryTreeNode<E> curr = root;
+    BinaryTreeNode<E> prev = null;
+
+    while (curr != null) {
+      prev = curr;
+      curr = comp.compare(val, curr.val) < 0
+        ? curr.left
+        : curr.right;
+    }
+
+    if (prev == null) {
+      root = new BinaryTreeNode<>(val);
+    } else if (comp.compare(val, prev.val) < 0) {
+      prev.left = new BinaryTreeNode<>(val);
+    } else {
+      prev.right = new BinaryTreeNode<>(val);
+    }
+  }
+
+  public boolean member(E val) {
+    BinaryTreeNode<E> curr = root;
+
+    while (curr != null) {
+      int compRes = comp.compare(val, curr.val);
+
+      if (compRes == 0) {
+        return true;
+      }
+
+      curr = compRes < 0
+        ? curr.left
+        : curr.right;
+    }
+
+    return false;
   }
 
 }
