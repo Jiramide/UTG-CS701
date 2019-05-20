@@ -1,7 +1,6 @@
 package com.company.datastructure;
 
 import java.util.Iterator;
-import java.lang.Iterable;
 
 class SinglyLinkedNode<E> {
 

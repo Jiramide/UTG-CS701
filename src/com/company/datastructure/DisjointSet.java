@@ -1,9 +1,9 @@
 package com.company.datastructure;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Collection;
 
 class DisjointSetNode<E> {
 
