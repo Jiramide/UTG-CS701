@@ -42,7 +42,7 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
   // out-order: RNL
   // postorder: LRN
 
-  public void preOrder(int curr, Consumer<E> process) {
+  private void preOrder(int curr, Consumer<E> process) {
     if (container[curr] == null) {
       return;
     }
@@ -56,7 +56,7 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
     preOrder(0, process);
   }
 
-  public void inOrder(int curr, Consumer<E> process) {
+  private void inOrder(int curr, Consumer<E> process) {
     if (container[curr] == null) {
       return;
     }
@@ -70,7 +70,7 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
     inOrder(0, process);
   }
 
-  public void outOrder(int curr, Consumer<E> process) {
+  private void outOrder(int curr, Consumer<E> process) {
     if (container[curr] == null) {
       return;
     }
@@ -84,7 +84,7 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
     outOrder(0, process);
   }
 
-  public void postOrder(int curr, Consumer<E> process) {
+  private void postOrder(int curr, Consumer<E> process) {
     if (container[curr] == null) {
       return;
     }
