@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 public class BubbleSort {
 
-  public static <E> void sort(E[] arr, Comparator<E> comparator) {
+  public static <E> void sort(E[] arr, Comparator<? super E> comparator) {
     for (int lastIdx = arr.length - 1; lastIdx != 0; lastIdx--) {
       for (int idx = 0; idx < lastIdx; idx++) {
         E fst = arr[idx];
@@ -22,16 +22,7 @@ public class BubbleSort {
   }
 
   public static <E extends Comparable<E>> void sort (E[] arr) {
-    for (int lastIdx = arr.length - 1; lastIdx != 0; lastIdx--) {
-      for (int idx = 0; idx < lastIdx; idx++) {
-        E fst = arr[idx];
-
-        if (fst.compareTo(arr[idx + 1]) > 0) {
-          arr[idx] = arr[idx + 1];
-          arr[idx + 1] = fst;
-        }
-      }
-    }
+    sort(arr, (x, y) -> x.compareTo(y));
   }
 
 }
