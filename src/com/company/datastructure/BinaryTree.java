@@ -1,6 +1,7 @@
 package com.company.datastructure;
 
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.function.Consumer;
 
 class BinaryTreeNode<E> {
@@ -37,20 +38,25 @@ public class BinaryTree<E> {
     this.comp = comp;
   }
 
-  public BinaryTree(Iterable<? extends E> container, Comparator<? super E> comp) {
-    this.comp = comp;
+  public BinaryTree(Iterator<? extends E> iter, Comparator<? super E> comp) {
+    this(comp);
+    iter.forEachRemaining((val) -> insert(val));
+  }
 
-    for (E elem : container) {
-      insert(elem);
-    }
+  public BinaryTree(Iterable<? extends E> container, Comparator<? super E> comp) {
+    this(container.iterator(), comp);
   }
 
   public static <E extends Comparable<E>> BinaryTree<E> withComparable() {
     return new BinaryTree<>((x, y) -> x.compareTo(y));
   }
 
+  public static <E extends Comparable<E>> BinaryTree<E> withComparable(Iterator<? extends E> iter) {
+    return new BinaryTree<>(iter, (x, y) -> x.compareTo(y));
+  }
+
   public static <E extends Comparable<E>> BinaryTree<E> withComparable(Iterable<? extends E> container) {
-    return new BinaryTree<>(container, (x, y) -> x.compareTo(y));
+    return BinaryTree.withComparable(container.iterator());
   }
 
   public int numItems() {
