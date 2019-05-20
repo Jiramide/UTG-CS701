@@ -72,6 +72,80 @@ public class BinaryTree<E> {
   // out-order: RNL
   // postorder: LRN
 
+  private void preOrder(BinaryTreeNode<E> curr, Consumer<E> process) {
+    if (curr == null) {
+      return;
+    }
+
+    process.accept(curr.val);
+    preOrder(curr.left, process);
+    preOrder(curr.right, process);
+  }
+
+  public void preOrder(Consumer<E> process) {
+    preOrder(root, process);
+  }
+
+  private void inOrder(BinaryTreeNode<E> curr, Consumer<E> process) {
+    if (curr == null) {
+      return;
+    }
+
+    inOrder(curr.left, process);
+    process.accept(curr.val);
+    inOrder(curr.right, process);
+  }
+
+  public void inOrder(Consumer<E> process) {
+    inOrder(root, process);
+  }
+
+  private void outOrder(BinaryTreeNode<E> curr, Consumer<E> process) {
+    if (curr == null) {
+      return;
+    }
+
+    outOrder(curr.right, process);
+    process.accept(curr.val);
+    outOrder(curr.left, process);
+  }
+
+  public void outOrder(Consumer<E> process) {
+    outOrder(root, process);
+  }
+
+  private void postOrder(BinaryTreeNode<E> curr, Consumer<E> process) {
+    if (curr == null) {
+      return;
+    }
+
+    postOrder(curr.left, process);
+    postOrder(curr.right, process);
+    process.accept(curr.val);
+  }
+
+  public void postOrder(Consumer<E> process) {
+    postOrder(root, process);
+  }
+
+  public void breadthFirst(Consumer<E> process) {
+    Queue<BinaryTreeNode<E>> queue = new Queue<>();
+    queue.enqueue(root);
+
+    while (!queue.isEmpty()) {
+      BinaryTreeNode<E> curr = queue.dequeue();
+      process.accept(curr.val);
+
+      if (curr.left != null) {
+        queue.enqueue(curr.left);
+      }
+
+      if (curr.right != null) {
+        queue.enqueue(curr.right);
+      }
+    }
+  }
+
   public void insert(E val) {
     BinaryTreeNode<E> curr = root;
     BinaryTreeNode<E> prev = null;
