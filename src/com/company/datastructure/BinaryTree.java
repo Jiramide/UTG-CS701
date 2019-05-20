@@ -16,11 +16,11 @@ class BinaryTreeNode<E> {
   int height() {
     int leftHeight = left != null
       ? left.height()
-      : 0;
+      : -1;
 
     int rightHeight = right != null
       ? right.height()
-      : 0;
+      : -1;
 
     return 1 + Math.max(leftHeight, rightHeight);
   }
