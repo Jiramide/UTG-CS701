@@ -170,7 +170,7 @@ public class Main {
 
     */
 
-    BinaryTree<Integer> tree = new BinaryTree<>();
+    BinaryTree<Integer> tree = BinaryTree.withComparable();
     tree.insert(5);
       tree.insert(2);
         tree.insert(1);
