@@ -18,8 +18,8 @@ import java.util.function.Function;
  */
 public class Option<T> {
 
-  private boolean hasValue;
-  private T val;
+  private final boolean hasValue;
+  private final T val;
 
   /**
    * Constructs an empty Option.
