@@ -44,4 +44,22 @@ public class Result<T, E> {
       : defaultVal;
   }
 
+  public <U> Result<U, E> map(Function<T, U> f) {
+    return isValid
+      ? Result.result(f.apply(result))
+      : Result.error(error);
+  }
+
+  public <F> Result<T, F> mapError(Function<E, F> f) {
+    return !isValid
+      ? Result.error(f.apply(error))
+      : Result.result(result);
+  }
+
+  public <U, F> Result<U, F> mapBoth(Function<T, U> f, Function<E, F> g) {
+    return isValid
+      ? Result.result(f.apply(result))
+      : Result.error(g.apply(error));
+  }
+
 }
