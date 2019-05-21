@@ -134,6 +134,30 @@ public class Option<T> {
       : defaultVal;
   }
 
+  /**
+   * Combines two Option<T> instances like combining booleans using &&.
+   * Returns the second Option if the first is non-empty, returns an empty Option otherwise.
+   * @param other
+   * @return The second Option if first is non-empty, empty Option otherwise.
+   */
+  public Option<T> and(Option<T> other) {
+    return hasValue
+      ? other
+      : this;
+  }
+
+  /**
+   * Combines two Option<T> instances like combining booleans using ||.
+   * Returns the first Option if it's non-empty, returns the second Option otherwise.
+   * @param other
+   * @return The first Option if non-empty, the second otherwise.
+   */
+  public Option<T> or(Option<T> other) {
+    return hasValue
+      ? this
+      : other;
+  }
+
   public String toString() {
     return hasValue
       ? "Value(" + val.toString() + ")"
