@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 public class HeapArr<E> extends ArrStruct<E> implements Cloneable {
 
-  private Comparator<? super E> comp;
+  private final Comparator<? super E> comp;
   private int len;
 
   //     0
@@ -147,9 +147,9 @@ public class HeapArr<E> extends ArrStruct<E> implements Cloneable {
   }
 
   public HeapArr<E> reverse() {
-    E[] containerClone = container.clone();
-    HeapArr<E> heapReverse = new HeapArr<>(containerClone, (x, y) -> comp.compare(y, x));
+    HeapArr<E> heapReverse = new HeapArr<>(container.clone(), (x, y) -> comp.compare(y, x));
     heapReverse.heapify();
+
     return heapReverse;
   }
 
