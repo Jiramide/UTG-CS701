@@ -8,16 +8,18 @@ public class Result<T, E> {
   private final T result;
   private final E error;
 
-  public Result(T result) {
-    this.isValid = true;
+  private Result(T result, E error) {
+    this.isValid = result != null;
     this.result = result;
-    this.error = null;
+    this.error = error;
   }
 
-  public Result(E error) {
-    this.isValid = true;
-    this.result = null;
-    this.error = error;
+  public static <T, E> Result<T, E> result(T result) {
+    return new Result<>(result, null);
+  }
+
+  public static <T, E> Result<T, E> error(E error) {
+    return new Result<>(null, error);
   }
 
   public boolean isResult() {
