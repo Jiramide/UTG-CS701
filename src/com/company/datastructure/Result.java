@@ -1,5 +1,7 @@
 package com.company.datastructure;
 
+import java.util.function.Function;
+
 public class Result<T, E> {
 
   private final boolean isValid;
@@ -16,6 +18,28 @@ public class Result<T, E> {
     this.isValid = true;
     this.result = null;
     this.error = error;
+  }
+
+  public boolean isResult() {
+    return isValid;
+  }
+
+  public boolean isError() {
+    return !isValid;
+  }
+
+  public T getResult() {
+    return result;
+  }
+
+  public E getError() {
+    return error;
+  }
+
+  public T fromResult(T defaultVal) {
+    return isValid
+      ? result
+      : defaultVal;
   }
 
 }
