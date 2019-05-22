@@ -44,6 +44,12 @@ public class Result<T, E> {
       : defaultVal;
   }
 
+  public E fromError(E defaultVal) {
+      return !isValid
+        ? error
+        : defaultVal;
+  }
+
   public <U> Result<U, E> map(Function<T, U> f) {
     return isValid
       ? Result.result(f.apply(result))
