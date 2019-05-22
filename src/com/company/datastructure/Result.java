@@ -62,4 +62,10 @@ public class Result<T, E> {
       : Result.error(g.apply(error));
   }
 
+  public <U> Result<U, E> bind(Function<T, Result<U, E>> f) {
+    return isValid
+      ? f.apply(result)
+      : Result.error(error);
+  }
+
 }
