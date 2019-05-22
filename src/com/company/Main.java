@@ -278,7 +278,14 @@ public class Main {
     }
     System.out.println("");
 
+    Result<Integer, String> a = Result.error("Lemma llll");
+    Result<Integer, String> b = Result.error("Ligma Script");
 
+    Result<Integer, String> quot = a.bind(x ->
+      b.bind(y ->
+        y == 0 ? Result.error("DIVBY0!!") : Result.result(x/y)));
+
+    System.out.println(quot.isResult() ? quot.getResult() : quot.getError());
   }
 
 }
