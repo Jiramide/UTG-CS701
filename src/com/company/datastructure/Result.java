@@ -51,15 +51,11 @@ public class Result<T, E> {
   }
 
   public <U> Result<U, E> map(Function<T, U> f) {
-    return isValid
-      ? Result.result(f.apply(result))
-      : Result.error(error);
+    return mapBoth(f, x -> x);
   }
 
   public <F> Result<T, F> mapError(Function<E, F> f) {
-    return !isValid
-      ? Result.error(f.apply(error))
-      : Result.result(result);
+    return mapBoth(x -> x, f);
   }
 
   public <U, F> Result<U, F> mapBoth(Function<T, U> f, Function<E, F> g) {
@@ -69,15 +65,17 @@ public class Result<T, E> {
   }
 
   public <U> Result<U, E> bind(Function<T, Result<U, E>> f) {
-    return isValid
-      ? f.apply(result)
-      : Result.error(error);
+    return bindBoth(f, Result::error);
   }
 
   public <F> Result<T, F> bindError(Function<E, Result<T, F>> f) {
-    return !isValid
-      ? f.apply(error)
-      : Result.result(result);
+    return bindBoth(Result::result, f);
+  }
+
+  public <U, F> Result<U, F> bindBoth(Function<T, Result<U, F>> f, Function<E, Result<U, F>> g) {
+    return isValid
+      ? f.apply(result)
+      : g.apply(error);
   }
 
 }

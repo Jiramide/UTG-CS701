@@ -40,7 +40,7 @@ public class BinaryTree<E> {
 
   public BinaryTree(Iterator<? extends E> iter, Comparator<? super E> comp) {
     this(comp);
-    iter.forEachRemaining((val) -> insert(val));
+    iter.forEachRemaining(val -> insert(val));
   }
 
   public BinaryTree(Iterable<? extends E> container, Comparator<? super E> comp) {
