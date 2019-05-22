@@ -68,4 +68,10 @@ public class Result<T, E> {
       : Result.error(error);
   }
 
+  public <F> Result<T, F> bindError(Function<E, Result<T, F>> f) {
+    return !isValid
+      ? f.apply(error)
+      : Result.result(result);
+  }
+
 }
