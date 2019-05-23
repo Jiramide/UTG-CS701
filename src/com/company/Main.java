@@ -285,7 +285,7 @@ public class Main {
       b.bind(y ->
         y == 0 ? Result.error("DIVBY0!!") : Result.result(x/y)));
 
-    System.out.println(quot.isResult() ? quot.getResult() : quot.getError());
+    System.out.println(quot);
   }
 
 }

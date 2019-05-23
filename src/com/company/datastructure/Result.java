@@ -78,4 +78,11 @@ public class Result<T, E> {
       : g.apply(error);
   }
 
+  @Override
+  public String toString() {
+    return isValid
+      ? "Result(" + result.toString() + ")"
+      : "Error(" + error.toString() + ")";
+  }
+
 }
