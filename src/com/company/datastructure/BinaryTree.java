@@ -14,18 +14,6 @@ class BinaryTreeNode<E> {
     this.val = val;
   }
 
-  int height() {
-    int leftHeight = left != null
-      ? left.height()
-      : -1;
-
-    int rightHeight = right != null
-      ? right.height()
-      : -1;
-
-    return 1 + Math.max(leftHeight, rightHeight);
-  }
-
 }
 
 public class BinaryTree<E> {
@@ -67,10 +55,16 @@ public class BinaryTree<E> {
     return len == 0;
   }
 
+  private int height(BinaryTreeNode<E> node) {
+    if (node == null) {
+      return -1;
+    }
+
+    return 1 + Math.max(height(node.left), height(node.right));
+  }
+
   public int height() {
-    return root != null
-      ? root.height()
-      : 0;
+    return height(root);
   }
 
   // preorder: NLR
