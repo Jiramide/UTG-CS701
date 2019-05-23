@@ -23,6 +23,6 @@ public class SelectionSort {
   }
 
   public static <E extends Comparable<E>> void sort(E[] arr) {
-    sort(arr, (x, y) -> x.compareTo(y));
+    sort(arr, Comparable::compareTo);
   }
 }

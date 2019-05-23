@@ -27,7 +27,7 @@ public class QuickSort {
   }
 
   public static <E extends Comparable<E>> int partition(E[] arr, int lo, int hi) {
-    return partition(arr, (x, y) -> x.compareTo(y), lo, hi);
+    return partition(arr, Comparable::compareTo, lo, hi);
   }
 
   public static <E> void sort(E[] arr, Comparator<? super E> comparator, int i, int j) {

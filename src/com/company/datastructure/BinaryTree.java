@@ -40,7 +40,7 @@ public class BinaryTree<E> {
 
   public BinaryTree(Iterator<? extends E> iter, Comparator<? super E> comp) {
     this(comp);
-    iter.forEachRemaining(val -> insert(val));
+    iter.forEachRemaining(this::insert);
   }
 
   public BinaryTree(Iterable<? extends E> container, Comparator<? super E> comp) {
@@ -48,11 +48,11 @@ public class BinaryTree<E> {
   }
 
   public static <E extends Comparable<E>> BinaryTree<E> withComparable() {
-    return new BinaryTree<>((x, y) -> x.compareTo(y));
+    return new BinaryTree<>(Comparable::compareTo);
   }
 
   public static <E extends Comparable<E>> BinaryTree<E> withComparable(Iterator<? extends E> iter) {
-    return new BinaryTree<>(iter, (x, y) -> x.compareTo(y));
+    return new BinaryTree<>(iter, Comparable::compareTo);
   }
 
   public static <E extends Comparable<E>> BinaryTree<E> withComparable(Iterable<? extends E> container) {

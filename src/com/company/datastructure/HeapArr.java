@@ -42,11 +42,11 @@ public class HeapArr<E> extends ArrStruct<E> implements Cloneable {
   }
 
   public static <E extends Comparable<E>> HeapArr<E> withComparable(E[] container) {
-    return new HeapArr<>(container, (x, y) -> x.compareTo(y));
+    return new HeapArr<>(container, Comparable::compareTo);
   }
 
   public static <E extends Comparable<E>> HeapArr<E> withComparable(Class<E> cls, int capacity) {
-    return new HeapArr<>(cls, capacity, (x, y) -> x.compareTo(y));
+    return new HeapArr<>(cls, capacity, Comparable::compareTo);
   }
 
   private void heapify() {

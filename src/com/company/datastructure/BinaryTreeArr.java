@@ -18,11 +18,11 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
   }
 
   public static <E extends Comparable<E>> BinaryTreeArr<E> withComparable(E[] container) {
-    return new BinaryTreeArr<>(container, (x, y) -> x.compareTo(y));
+    return new BinaryTreeArr<>(container, Comparable::compareTo);
   }
 
   public static <E extends Comparable<E>> BinaryTreeArr<E> withComparable(Class<E> cls, int capacity) {
-    return new BinaryTreeArr<>(cls, capacity, (x, y) -> x.compareTo(y));
+    return new BinaryTreeArr<>(cls, capacity, Comparable::compareTo);
   }
 
   private int getLeftChildIdx(int parent) {
