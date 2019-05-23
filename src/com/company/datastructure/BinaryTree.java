@@ -67,6 +67,22 @@ public class BinaryTree<E> {
     return height(root);
   }
 
+  private int minHeight(BinaryTreeNode<E> node) {
+    if (node == null) {
+      return -1;
+    }
+
+    return 1 + Math.min(height(node.left), height(node.right));
+  }
+
+  public int minHeight() {
+    return minHeight(root);
+  }
+
+  public boolean isBalanced() {
+    return height() - minHeight() <= 1;
+  }
+
   // preorder: NLR
   // in-order: LNR
   // out-order: RNL
