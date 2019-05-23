@@ -45,9 +45,9 @@ public class Result<T, E> {
   }
 
   public E fromError(E defaultVal) {
-      return !isValid
-        ? error
-        : defaultVal;
+    return !isValid
+      ? error
+      : defaultVal;
   }
 
   public <U> Result<U, E> map(Function<T, U> f) {
