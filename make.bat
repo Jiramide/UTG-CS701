@@ -1,6 +1,6 @@
 @echo off
-set /p lang=Input which language directory to make: 
-set /p makeArgs=Makefile arguments: 
+set lang=%1
+set makeArgs=%2
 
 echo [%date% %time%] %lang% Makefile running: 
 
