@@ -18,3 +18,7 @@ insert_final_newline = false
 indent_style = tab
 tab_width = 4
 insert_final_newline = true
+
+[*.bat]
+trim_trailing_whitespace = false
+insert_final_newline = false
