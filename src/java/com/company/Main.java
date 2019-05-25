@@ -3,6 +3,7 @@ package com.company;
 import java.util.Scanner;
 import java.util.Set;
 import com.company.datastructure.*;
+import com.company.algo.*;
 
 public class Main {
 
@@ -169,6 +170,21 @@ public class Main {
     }
 
     */
+
+    Integer[] arr = {1, 8, 5, 3, 0, 7, 2, 6, 9, 4};
+    System.out.println("Using Comparator(HeapSort)");
+    System.out.print("Unsorted: ");
+
+    for (Integer i : arr) {
+      Main.printElem(i);
+    }
+
+    System.out.print("\nSorted: ");
+    HeapSort.sort(arr, (x, y) -> y - x);
+    for (Integer i : arr) {
+      Main.printElem(i);
+    }
+    System.out.println("");
 
     BinaryTree<Integer> tree = BinaryTree.withComparable();
     tree.insert(5);
