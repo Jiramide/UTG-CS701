@@ -38,11 +38,15 @@ public class List<E> extends ArrStruct<E> {
   }
 
   public boolean validIndex(int idx) {
-    return idx >= len;
+    return idx >= 0 && idx < len;
   }
 
   public int length() {
     return len;
+  }
+
+  public boolean isEmpty() {
+    return len == 0;
   }
 
   public void setLoadFactor(double loadFactor) {
@@ -88,7 +92,11 @@ public class List<E> extends ArrStruct<E> {
     container[idx] = elem;
   }
 
-  public void push(E elem) {
+  public void cons(E elem) {
+    insert(0, elem);
+  }
+
+  public void consLast(E elem) {
     len += 1;
 
     if (needResize()) {
@@ -96,10 +104,6 @@ public class List<E> extends ArrStruct<E> {
     }
 
     container[len - 1] = elem;
-  }
-
-  public void pushFront(E elem) {
-    insert(0, elem);
   }
 
   public E remove(int idx) throws IndexOutOfBoundsException {
@@ -123,12 +127,20 @@ public class List<E> extends ArrStruct<E> {
     return toRemove;
   }
 
-  public E pop() {
+  public E uncons() {
+    return remove(0);
+  }
+
+  public E unconsLast() {
     return remove(len - 1);
   }
 
-  public E popFront() {
-    return remove(0);
+  public E peek() {
+    return container[0];
+  }
+
+  public E peekLast() {
+    return container[len - 1];
   }
 
   public void concat(List<E> toConcat) {
@@ -157,7 +169,18 @@ public class List<E> extends ArrStruct<E> {
   }
 
   public <F> List<F> bind(Function<E, List<F>> f) {
-    List<F> curr = f.apply(get(len - 1));
+    if (isEmpty()) {
+      // hack to create an empty List<F>
+      return map(x -> null);
+    }
+
+    List<F> front = f.apply(get(0));
+
+    for (int idx = 1; idx < len; idx++) {
+      front.concat(f.apply(get(idx)));
+    }
+
+    return front;
   }
 
   @Override
