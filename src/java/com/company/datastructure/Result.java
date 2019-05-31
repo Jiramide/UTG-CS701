@@ -59,7 +59,9 @@ public class Result<T, E> {
   }
 
   public <U, F> Result<U, F> mapBoth(Function<T, U> f, Function<E, F> g) {
-    return bindBoth(f.andThen(Result::result), g.andThen(Result::error));
+    return isValid
+      ? Result.result(f.apply(result))
+      : Result.error(g.apply(error));
   }
 
   public <U> Result<U, E> bind(Function<T, Result<U, E>> f) {

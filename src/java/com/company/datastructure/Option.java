@@ -90,7 +90,9 @@ public class Option<T> {
    * @return A new Option which may contain the transformed value or be empty.
    */
   public <U> Option<U> map(Function<T, U> f) {
-    return bind(f.andThen(Option::new));
+    return hasValue
+      ? new Option<>(f.apply(val))
+      : new Option<>();
   }
 
   /**
