@@ -127,7 +127,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     return idx >= 0 && idx < len;
   }
 
-  protected DoublyLinkedNode<E> indexNode(int idx) {
+  protected DoublyLinkedNode<E> indexNode(int idx) throws IndexOutOfBoundsException {
     if (!validIndex(idx)) {
       throw new IndexOutOfBoundsException("Cannot index element #" + idx + " in DoublyLinkedList.");
     }
@@ -159,7 +159,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
       : new Option<>(); // Unsafe to index, return empty Option.
   }
 
-  public E index(int idx) {
+  public E index(int idx) throws IndexOutOfBoundsException {
     return indexNode(idx).val;
   }
 
@@ -173,7 +173,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     return len;
   }
 
-  private void addNodeAfter(DoublyLinkedNode<E> node, int idx) {
+  private void addNodeAfter(DoublyLinkedNode<E> node, int idx) throws IndexOutOfBoundsException {
     if (len == 0) {
       head = node;
       last = node;
@@ -192,7 +192,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     len += 1;
   }
 
-  private void addNodeBefore(DoublyLinkedNode<E> node, int idx) {
+  private void addNodeBefore(DoublyLinkedNode<E> node, int idx) throws IndexOutOfBoundsException {
     if (len == 0) {
       head = node;
       last = node;
@@ -211,11 +211,11 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     len += 1;
   }
 
-  public void addAfter(E val, int idx) {
+  public void addAfter(E val, int idx) throws IndexOutOfBoundsException {
     addNodeAfter(new DoublyLinkedNode<>(val), idx);
   }
 
-  public void addBefore(E val, int idx) {
+  public void addBefore(E val, int idx) throws IndexOutOfBoundsException {
     addNodeBefore(new DoublyLinkedNode<>(val), idx);
   }
 
@@ -227,7 +227,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     addAfter(val, len - 1);
   }
 
-  public E remove(int idx) {
+  public E remove(int idx) throws IndexOutOfBoundsException {
     if (!validIndex(idx)) {
       throw new IndexOutOfBoundsException("Cannot remove element #" + idx + " from DoublyLinkedList.");
     }
@@ -257,7 +257,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
       : new Option<>(); // Unsafe to remove, return empty Option.
   }
 
-  public E uncons() {
+  public E uncons() throws IndexOutOfBoundsException {
     return remove(0);
   }
 
@@ -265,7 +265,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     return safeRemove(0);
   }
 
-  public E unconsLast() {
+  public E unconsLast() throws IndexOutOfBoundsException {
     return remove(len - 1);
   }
 
@@ -281,7 +281,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     return safeIndex(0);
   }
 
-  public E peekLast() {
+  public E peekLast() throws IndexOutOfBoundsException {
     return index(len - 1);
   }
 
