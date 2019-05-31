@@ -18,6 +18,7 @@ CLASSES := \
 	pkg/datastructure/DoublyLinkedList.class \
 	pkg/datastructure/Heap.class \
 	pkg/datastructure/HeapArr.class \
+	pkg/datastructure/List.class \
 	pkg/datastructure/Option.class \
 	pkg/datastructure/Queue.class \
 	pkg/datastructure/QueueArr.class \
