@@ -78,6 +78,18 @@ public class Result<T, E> {
       : g.apply(error);
   }
 
+  public Result<T, E> and(Result<T, E> other) {
+    return isValid
+      ? other
+      : this;
+  }
+
+  public Result<T, E> or (Result<T, E> other) {
+    return isValid
+      ? this
+      : other;
+  }
+
   @Override
   public String toString() {
     return isValid
