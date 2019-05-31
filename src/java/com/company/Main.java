@@ -316,9 +316,12 @@ public class Main {
     }
     System.out.println("");
 
-    List<Double> divList = incrementedIntList.bind(x -> List.of((double)x/2, (double)x*3/2));
-    for (int idx = 0; idx < divList.length(); idx++) {
-      Main.printElem(divList.get(idx));
+    List<Integer> addList = intList.bind(x ->
+      incrementedIntList.bind(y ->
+        List.of(x + y)));
+
+    for (int idx = 0; idx < addList.length(); idx++) {
+      Main.printElem(addList.get(idx));
     }
     System.out.println("");
   }
