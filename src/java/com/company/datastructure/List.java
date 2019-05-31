@@ -29,6 +29,10 @@ public class List<E> extends ArrStruct<E> {
     this.loadFactor = loadFactor;
   }
 
+  public static <E> List<E> of(E... elems) {
+    return new List<>(elems);
+  }
+
   private boolean needResize() {
     return ((double)len)/getCapacity() >= loadFactor;
   }
@@ -127,25 +131,33 @@ public class List<E> extends ArrStruct<E> {
     return toRemove;
   }
 
-  public E uncons() {
+  public E uncons() throws IndexOutOfBoundsException {
     return remove(0);
   }
 
-  public E unconsLast() {
+  public E unconsLast() throws IndexOutOfBoundsException {
     return remove(len - 1);
   }
 
-  public E peek() {
+  public E peek() throws IndexOutOfBoundsException {
+    if (!validIndex(0)) {
+      throw new IndexOutOfBoundsException("Cannot index element #0 in List.");
+    }
+
     return container[0];
   }
 
-  public E peekLast() {
+  public E peekLast() throws IndexOutOfBoundsException {
+    if (!validIndex(len - 1)) {
+      throw new IndexOutOfBoundsException("Cannot index element #" + (len - 1) + " in List.");
+    }
+
     return container[len - 1];
   }
 
   public void concat(List<E> toConcat) {
     for (int idx = 0; idx < toConcat.length(); idx++) {
-      set(len, toConcat.get(idx));
+      consLast(toConcat.get(idx));
     }
   }
 
@@ -160,6 +172,7 @@ public class List<E> extends ArrStruct<E> {
     @SuppressWarnings("unchecked")
     // type unsafe
     List<F> mapped = new List<F>((F[])new Object[getCapacity()], loadFactor);
+    mapped.len = len;
 
     for (int idx = 0; idx < len; idx++) {
       mapped.set(idx, f.apply(get(idx)));

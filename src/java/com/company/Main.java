@@ -302,6 +302,25 @@ public class Main {
         y == 0 ? Result.error("DIVBY0!!") : Result.result(x/y)));
 
     System.out.println(quot);
+
+    Integer[] intArr = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    List<Integer> intList = new List<>(intArr);
+    for (int idx = 0; idx < intList.length(); idx++) {
+      Main.printElem(intList.get(idx));
+    }
+    System.out.println("");
+
+    List<Integer> incrementedIntList = intList.map(x -> x + 2);
+    for (int idx = 0; idx < incrementedIntList.length(); idx++) {
+      Main.printElem(incrementedIntList.get(idx));
+    }
+    System.out.println("");
+
+    List<Double> divList = incrementedIntList.bind(x -> List.of((double)x/2, (double)x*3/2));
+    for (int idx = 0; idx < divList.length(); idx++) {
+      Main.printElem(divList.get(idx));
+    }
+    System.out.println("");
   }
 
 }
