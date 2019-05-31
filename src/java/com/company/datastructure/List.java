@@ -1,5 +1,7 @@
 package com.company.datastructure;
 
+import java.util.function.Function;
+
 public class List<E> extends ArrStruct<E> {
 
   public int len;
@@ -39,16 +41,21 @@ public class List<E> extends ArrStruct<E> {
     return idx >= len;
   }
 
+  public int length() {
+    return len;
+  }
+
+  public void setLoadFactor(double loadFactor) {
+    this.loadFactor = loadFactor;
+    resizeWithLoadFactor();
+  }
+
   public E get(int idx) throws IndexOutOfBoundsException {
     if (!validIndex(idx)) {
       throw new IndexOutOfBoundsException("Cannot index element #" + idx + " in List.");
     }
 
     return container[idx];
-  }
-
-  public int length() {
-    return len;
   }
 
   public void set(int idx, E elem) throws IndexOutOfBoundsException {
@@ -81,6 +88,20 @@ public class List<E> extends ArrStruct<E> {
     container[idx] = elem;
   }
 
+  public void push(E elem) {
+    len += 1;
+
+    if (needResize()) {
+      resizeWithLoadFactor();
+    }
+
+    container[len - 1] = elem;
+  }
+
+  public void pushFront(E elem) {
+    insert(0, elem);
+  }
+
   public E remove(int idx) throws IndexOutOfBoundsException {
     if (!validIndex(idx)) {
       throw new IndexOutOfBoundsException("Cannot index element #" + idx + " in List.");
@@ -100,6 +121,48 @@ public class List<E> extends ArrStruct<E> {
 
     container[len] = null;
     return toRemove;
+  }
+
+  public E pop() {
+    return remove(len - 1);
+  }
+
+  public E popFront() {
+    return remove(0);
+  }
+
+  public void concat(List<E> toConcat) {
+    for (int idx = 0; idx < toConcat.length(); idx++) {
+      set(len, toConcat.get(idx));
+    }
+  }
+
+  public List<E> immutableConcat(List<E> toConcat) {
+    List<E> clone = clone();
+    clone.concat(toConcat);
+
+    return clone;
+  }
+
+  public <F> List<F> map(Function<E, F> f) {
+    @SuppressWarnings("unchecked")
+    // type unsafe
+    List<F> mapped = new List<F>((F[])new Object[getCapacity()], loadFactor);
+
+    for (int idx = 0; idx < len; idx++) {
+      mapped.set(idx, f.apply(get(idx)));
+    }
+
+    return mapped;
+  }
+
+  public <F> List<F> bind(Function<E, List<F>> f) {
+    List<F> curr = f.apply(get(len - 1));
+  }
+
+  @Override
+  public List<E> clone() {
+    return new List<>(container.clone(), loadFactor);
   }
 
 }
