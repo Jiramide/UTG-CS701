@@ -4,8 +4,8 @@ import java.util.function.Function;
 
 public class List<E> extends ArrStruct<E> {
 
-  public int len;
-  public double loadFactor;
+  private int len;
+  private double loadFactor;
 
   public List(E[] container) {
     this(container, 0.75);
