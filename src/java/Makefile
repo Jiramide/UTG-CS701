@@ -14,6 +14,7 @@ CLASSES := \
 	pkg/algo/SelectionSort.class \
 	pkg/datastructure/ArrStruct.class \
 	pkg/datastructure/BinaryTree.class \
+	pkg/datastructure/BinaryTreeArr.class \
 	pkg/datastructure/DisjointSet.class \
 	pkg/datastructure/DoublyLinkedList.class \
 	pkg/datastructure/Heap.class \
@@ -25,7 +26,9 @@ CLASSES := \
 	pkg/datastructure/Result.class \
 	pkg/datastructure/SinglyLinkedList.class \
 	pkg/datastructure/Stack.class \
-	pkg/datastructure/StackArr.class
+	pkg/datastructure/StackArr.class \
+	pkg/functional/Functor.class \
+	pkg/functional/Monad.class
 
 $(JAVA_OUT_DIR)/$(PKG_DIR)/Main.java : $(JAVA_SRC_DIR)/$(PKG_DIR)/Main.java $(subst pkg/,$(JAVA_OUT_DIR)/$(PKG_DIR)/,$(CLASSES))
 	javac $(EXTRA_COMPILER_ARGS) -d $(JAVA_OUT_DIR) -cp $(JAVA_SRC_DIR) $(JAVA_SRC_DIR)/$(PKG_DIR)/Main.java
