@@ -6,14 +6,17 @@ import java.util.function.Consumer;
 public class BinaryTreeArr<E> extends ArrStruct<E> {
 
   private Comparator<? super E> comp;
+  private int len;
 
   public BinaryTreeArr(E[] container, Comparator<? super E> comp) {
     super(container);
+    this.len = container.length;
     this.comp = comp;
   }
 
   public BinaryTreeArr(Class<E> cls, int capacity, Comparator<? super E> comp) {
     super(cls, capacity);
+    this.len = 0;
     this.comp = comp;
   }
 
@@ -23,6 +26,14 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
 
   public static <E extends Comparable<E>> BinaryTreeArr<E> withComparable(Class<E> cls, int capacity) {
     return new BinaryTreeArr<>(cls, capacity, Comparable::compareTo);
+  }
+
+  public int numItems() {
+    return len;
+  }
+
+  public boolean isEmpty() {
+    return len == 0;
   }
 
   private int getLeftChildIdx(int parent) {
@@ -107,6 +118,8 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
   }
 
   public void insert(E val) {
+    len += 1;
+
     int curr = 0;
     while (container[curr] != null) {
       curr = comp.compare(val, container[curr]) < 0

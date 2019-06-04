@@ -163,6 +163,8 @@ public class BinaryTree<E> {
   }
 
   public void insert(E val) {
+    len += 1;
+
     BinaryTreeNode<E> curr = root;
     BinaryTreeNode<E> prev = null;
 

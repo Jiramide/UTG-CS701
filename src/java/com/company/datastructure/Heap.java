@@ -120,7 +120,7 @@ public class Heap<E> {
     }
   }
 
-  public int length() {
+  public int numItems() {
     return len;
   }
 
