@@ -1,6 +1,8 @@
 package com.company.datastructure;
 
 import java.util.function.Function;
+import com.company.functional.Functor;
+import com.company.functional.Monad;
 
 /**
  * <p>
@@ -16,7 +18,7 @@ import java.util.function.Function;
  * @author Jade Piramide <jadepiramidepogi@gmail.com>
  * @param <T> The type held inside the Option.
  */
-public class Option<T> {
+public class Option<T> implements Functor<T>, Monad<T> {
 
   private final boolean hasValue;
   private final T val;
@@ -36,6 +38,42 @@ public class Option<T> {
   public Option(T val) {
     this.hasValue = true;
     this.val = val;
+  }
+
+  /**
+   * Creates an identity for bind.
+   *
+   * <p>
+   * Creates an identity for bind.
+   * i.e: unit(t).bind(f) is the same action as f(t)
+   * This can be understood as the monadic identity law where
+   * return t >>= f == f t
+   * </p>
+   *
+   * @param <T> The type of the value inside the Option.
+   * @param val The value to put into the Option.
+   * @return A non-empty Option.
+   */
+  public static <T> Option<T> unit(T val) {
+    return new Option<>(val);
+  }
+
+  /**
+   * Flattens a level of the Option structure.
+   *
+   * <p>
+   * 'Joins' (or flattens) a level from the Option structure.
+   * Equivalent to mon.bind(x -> x)
+   * Bind can be implemented in terms of join and map by composing them like so:
+   * mon.bind(f) := join(mon.map(f))
+   * </p>
+   *
+   * @param <T> The type of the value inside the Option.
+   * @param mon The Option to flatten.
+   * @return The flattened Option.
+   */
+  public static <T> Option<T> join(Option<Option<T>> mon) {
+    return mon.fromOption(new Option<>());
   }
 
   /**
