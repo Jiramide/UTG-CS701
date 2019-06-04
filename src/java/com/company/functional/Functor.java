@@ -2,8 +2,8 @@ package com.company.functional;
 
 import java.util.function.Function;
 
-public interface Functor<T> {
+public interface Functor<E> { /*
 
-  public <E, F> T map(Function<E, F> f);
+  public <F> Functor<F> map(Function<E, F> f);
 
-}
+*/ }
