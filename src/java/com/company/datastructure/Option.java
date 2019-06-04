@@ -13,6 +13,9 @@ import com.company.functional.Monad;
  * Option allows for "safe nulls" and allows you to perform actions on values (which may not exist)
  * without having to check whether they exist. This cleans up a lot of boilerplate code that try
  * to test for null.
+ *
+ * ! This class properly implements the Functor interface as it follows all
+ * ! of the requirements listed within the documentation of the interface
  * </p>
  *
  * @author Jade Piramide <jadepiramidepogi@gmail.com>
