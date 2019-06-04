@@ -169,7 +169,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
       : new Option<>(); // Unsafe to index, return empty Option.
   }
 
-  public int numItems() {
+  public int length() {
     return len;
   }
 

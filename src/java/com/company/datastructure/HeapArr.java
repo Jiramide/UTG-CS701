@@ -107,7 +107,7 @@ public class HeapArr<E> extends ArrStruct<E> implements Cloneable {
     return (int)Math.floor((child - 1)/2);
   }
 
-  public int length() {
+  public int numItems() {
     return len;
   }
 

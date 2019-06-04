@@ -220,6 +220,10 @@ public class Main {
     tree.breadthFirst(Main::printElem);
     System.out.println("");
 
+    System.out.println("BinaryTree len: " + tree.numItems());
+    System.out.println("BinaryTree height: " + tree.height());
+    System.out.println("BinaryTree minHeight: " + tree.minHeight());
+
     System.out.println("StackArr");
     Integer[] stackContainer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     StackArr<Integer> stack = new StackArr<>(stackContainer);
