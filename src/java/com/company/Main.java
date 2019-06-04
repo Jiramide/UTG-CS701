@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 import com.company.datastructure.*;
@@ -223,6 +224,16 @@ public class Main {
     System.out.println("BinaryTree len: " + tree.numItems());
     System.out.println("BinaryTree height: " + tree.height());
     System.out.println("BinaryTree minHeight: " + tree.minHeight());
+
+    ArrayList<Integer> treeList = new ArrayList<>();
+    for (Integer curr = 0; curr <= 10; curr++) {
+      treeList.add(curr);
+    }
+    BinaryTree<Integer> tree2 = BinaryTree.withComparable(treeList);
+
+    System.out.println("Unbalanced binaryTree len: " + tree2.numItems());
+    System.out.println("Unbalanced binaryTree height: " + tree2.height());
+    System.out.println("Unbalanced binaryTree minHeight: " + tree2.minHeight());
 
     System.out.println("StackArr");
     Integer[] stackContainer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
