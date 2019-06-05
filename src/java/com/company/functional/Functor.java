@@ -19,7 +19,7 @@ import java.util.function.Function;
  * the source yourself. </b> Due to this interface being empty, the compiler doesn't fuss
  * whether you've implemented the methods or not, due to this interface <i> not </i>
  * having any methods in the first place. The interface still contains what the methods
- * of Functor are, and documentation associated with each method.
+ * of Functor are (commented out), and documentation associated with each method.
  *
  * ? If you want to properly implement Functor<E>, make sure that your class meets the following
  * ? requirements:
