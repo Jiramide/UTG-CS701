@@ -36,6 +36,34 @@ public class BinaryTreeArr<E> extends ArrStruct<E> {
     return len == 0;
   }
 
+  private int height(int idx) {
+    if (container[idx] == null) {
+      return -1;
+    }
+
+    return 1 + Math.max(height(getLeftChildIdx(idx)), height(getRightChildIdx(idx)));
+  }
+
+  public int height() {
+    return height(0);
+  }
+
+  private int minHeight(int idx) {
+    if (container[idx] == null) {
+      return -1;
+    }
+
+    return 1 + Math.min(minHeight(getLeftChildIdx(idx)), minHeight(getRightChildIdx(idx)));
+  }
+
+  public int minHeight() {
+    return minHeight(0);
+  }
+
+  public boolean isBalanced() {
+    return height() - minHeight() <= 1;
+  }
+
   private int getLeftChildIdx(int parent) {
     return 2*parent + 1;
   }
