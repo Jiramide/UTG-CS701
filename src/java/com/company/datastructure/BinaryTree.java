@@ -7,11 +7,13 @@ import java.util.function.Consumer;
 class BinaryTreeNode<E> {
 
   E val;
+  BinaryTreeNode<E> parent;
   BinaryTreeNode<E> left;
   BinaryTreeNode<E> right;
 
-  BinaryTreeNode(E val) {
+  BinaryTreeNode(E val, BinaryTreeNode<E> parent) {
     this.val = val;
+    this.parent = parent;
   }
 
 }
@@ -176,11 +178,11 @@ public class BinaryTree<E> {
     }
 
     if (prev == null) {
-      root = new BinaryTreeNode<>(val);
+      root = new BinaryTreeNode<>(val, null);
     } else if (comp.compare(val, prev.val) < 0) {
-      prev.left = new BinaryTreeNode<>(val);
+      prev.left = new BinaryTreeNode<>(val, prev);
     } else {
-      prev.right = new BinaryTreeNode<>(val);
+      prev.right = new BinaryTreeNode<>(val, prev);
     }
   }
 
