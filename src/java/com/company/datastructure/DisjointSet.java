@@ -5,54 +5,54 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-class DisjointSetNode<E> {
+public class DisjointSet<E> {
 
-  private DisjointSetNode<E> parent;
-  private E val;
+  static class Node<E> {
 
-  DisjointSetNode(E val) {
-    this.val = val;
-    this.parent = this;
-  }
+    private DisjointSet.Node<E> parent;
+    private E val;
 
-  E getVal() {
-    return val;
-  }
+    Node(E val) {
+      this.val = val;
+      this.parent = this;
+    }
 
-  void setParent(DisjointSetNode<E> parent) {
-    this.parent = parent;
-  }
+    E getVal() {
+      return val;
+    }
 
-  DisjointSetNode<E> getParent() {
-    return parent;
-  }
+    void setParent(DisjointSet.Node<E> parent) {
+      this.parent = parent;
+    }
 
-  DisjointSetNode<E> getRoot() {
-    while (parent != parent.parent) {
+    DisjointSet.Node<E> getParent() {
+      return parent;
+    }
+
+    DisjointSet.Node<E> getRoot() {
+      while (parent != parent.parent) {
+        parent = parent.parent;
+      }
+
+      return parent;
+    }
+
+    void flatten() {
+      if (isRoot()) {
+        return;
+      }
+
+      parent.flatten();
       parent = parent.parent;
     }
 
-    return parent;
-  }
-
-  void flatten() {
-    if (isRoot()) {
-      return;
+    boolean isRoot() {
+      return parent == this;
     }
 
-    parent.flatten();
-    parent = parent.parent;
   }
 
-  boolean isRoot() {
-    return parent == this;
-  }
-
-}
-
-public class DisjointSet<E> {
-
-  private HashMap<E, DisjointSetNode<E>> nodes;
+  private HashMap<E, DisjointSet.Node<E>> nodes;
 
   public DisjointSet() {
     this.nodes = new HashMap<>();
@@ -67,7 +67,7 @@ public class DisjointSet<E> {
   }
 
   public void add(E elem) {
-    nodes.put(elem, new DisjointSetNode<>(elem));
+    nodes.put(elem, new DisjointSet.Node<>(elem));
   }
 
   public boolean inTree(E elem) {
@@ -90,7 +90,7 @@ public class DisjointSet<E> {
   public int numSets() {
     int count = 0;
 
-    for (DisjointSetNode<E> node : nodes.values()) {
+    for (DisjointSet.Node<E> node : nodes.values()) {
       if (node.isRoot()) {
         count += 1;
       }
@@ -102,7 +102,7 @@ public class DisjointSet<E> {
   public Collection<Set<E>> sets() {
     HashMap<E, Set<E>> setsMap = new HashMap<>(nodes.size());
 
-    for (DisjointSetNode<E> node : nodes.values()) {
+    for (DisjointSet.Node<E> node : nodes.values()) {
       E root = node.getRoot().getVal();
 
       if (!setsMap.containsKey(root)) {
