@@ -8,12 +8,28 @@ public class BinaryTree<E> {
 
   static class Node<E> {
 
-    E val;
-    Node<E> left;
-    Node<E> right;
+    protected E val;
+    protected Node<E> left;
+    protected Node<E> right;
 
     Node(E val) {
       this.val = val;
+    }
+
+    protected Node<E> getLeft() {
+      return left;
+    }
+
+    protected Node<E> getRight() {
+      return right;
+    }
+
+    protected void setLeft(Node<E> node) {
+      left = node;
+    }
+
+    protected void setRight(Node<E> node) {
+      right = node;
     }
 
   }
@@ -49,12 +65,12 @@ public class BinaryTree<E> {
     return BinaryTree.withComparable(container.iterator());
   }
 
-  protected void setRoot(BinaryTree.Node<E> node) {
-    root = node;
-  }
-
   protected BinaryTree.Node<E> getRoot() {
     return root;
+  }
+
+  protected void setRoot(BinaryTree.Node<E> node) {
+    root = node;
   }
 
   public int numItems() {
@@ -104,8 +120,8 @@ public class BinaryTree<E> {
     }
 
     process.accept(curr.val);
-    preOrder(curr.left, process);
-    preOrder(curr.right, process);
+    preOrder(curr.getLeft(), process);
+    preOrder(curr.getRight(), process);
   }
 
   public void preOrder(Consumer<E> process) {
@@ -117,9 +133,9 @@ public class BinaryTree<E> {
       return;
     }
 
-    inOrder(curr.left, process);
+    inOrder(curr.getLeft(), process);
     process.accept(curr.val);
-    inOrder(curr.right, process);
+    inOrder(curr.getRight(), process);
   }
 
   public void inOrder(Consumer<E> process) {
@@ -131,9 +147,9 @@ public class BinaryTree<E> {
       return;
     }
 
-    outOrder(curr.right, process);
+    outOrder(curr.getRight(), process);
     process.accept(curr.val);
-    outOrder(curr.left, process);
+    outOrder(curr.getLeft(), process);
   }
 
   public void outOrder(Consumer<E> process) {
@@ -145,8 +161,8 @@ public class BinaryTree<E> {
       return;
     }
 
-    postOrder(curr.left, process);
-    postOrder(curr.right, process);
+    postOrder(curr.getLeft(), process);
+    postOrder(curr.getRight(), process);
     process.accept(curr.val);
   }
 
@@ -156,6 +172,7 @@ public class BinaryTree<E> {
 
   public void breadthFirst(Consumer<E> process) {
     Queue<BinaryTree.Node<E>> queue = new Queue<>();
+    BinaryTree.Node<E> root = getRoot();
 
     if (root != null) {
       queue.enqueue(root);
@@ -165,12 +182,12 @@ public class BinaryTree<E> {
       BinaryTree.Node<E> curr = queue.dequeue();
       process.accept(curr.val);
 
-      if (curr.left != null) {
-        queue.enqueue(curr.left);
+      if (curr.getLeft() != null) {
+        queue.enqueue(curr.getLeft());
       }
 
-      if (curr.right != null) {
-        queue.enqueue(curr.right);
+      if (curr.getRight() != null) {
+        queue.enqueue(curr.getRight());
       }
     }
   }
@@ -184,8 +201,8 @@ public class BinaryTree<E> {
     while (curr != null) {
       prev = curr;
       curr = comp.compare(val, curr.val) < 0
-        ? curr.left
-        : curr.right;
+        ? curr.getLeft()
+        : curr.getRight();
     }
 
     if (prev == null) {
@@ -208,8 +225,8 @@ public class BinaryTree<E> {
       }
 
       curr = compRes < 0
-        ? curr.left
-        : curr.right;
+        ? curr.getLeft()
+        : curr.getRight();
     }
 
     return false;
