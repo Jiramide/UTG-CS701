@@ -18,9 +18,9 @@ public class BinaryTree<E> {
 
   }
 
-  private BinaryTree.Node<E> root;
-  private Comparator<? super E> comp;
-  private int len;
+  protected BinaryTree.Node<E> root;
+  protected Comparator<? super E> comp;
+  protected int len;
 
   public BinaryTree(Comparator<? super E> comp) {
     this.root = null;
