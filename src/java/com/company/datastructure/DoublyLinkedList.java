@@ -3,120 +3,120 @@ package com.company.datastructure;
 import java.util.Iterator;
 import java.util.ListIterator;
 
-class DoublyLinkedNode<E> {
-
-  DoublyLinkedNode<E> next;
-  DoublyLinkedNode<E> prev;
-  E val;
-
-  DoublyLinkedNode(E val) {
-    this.val = val;
-  }
-
-  static <E> void makeNeighbours(DoublyLinkedNode<E> n0, DoublyLinkedNode<E> n1, DoublyLinkedNode<E> n2) {
-    if (n0 != null) {
-      n0.next = n1;
-    }
-
-    if (n2 != null) {
-      n2.prev = n1;
-    }
-
-    if (n1 != null) {
-      n1.prev = n0;
-      n1.next = n2;
-    }
-  }
-
-  static <E> void relinkNeighbours(DoublyLinkedNode<E> node) {
-    if (node.prev != null) {
-      node.prev.next = node.next;
-    }
-
-    if (node.next != null) {
-      node.next.prev = node.prev;
-    }
-  }
-
-}
-
-class DoublyLinkedListIterator<E> implements ListIterator<E> {
-
-  private DoublyLinkedNode<E> curr;
-  private int currIdx;
-
-  DoublyLinkedListIterator(DoublyLinkedList<E> collection) {
-    this.curr = collection.indexNode(0);
-    this.currIdx = 0;
-  }
-
-  DoublyLinkedListIterator(DoublyLinkedList<E> collection, int idx) {
-    this.curr = collection.indexNode(idx);
-    this.currIdx = idx;
-  }
-
-  @Override
-  public boolean hasNext() {
-    return curr != null;
-  }
-
-  @Override
-  public boolean hasPrevious() {
-    return curr != null;
-  }
-
-  @Override
-  public E next() {
-    DoublyLinkedNode<E> oldCurr = curr;
-    curr = curr.next;
-    currIdx += 1;
-
-    return oldCurr.val;
-  }
-
-  @Override
-  public E previous() {
-    DoublyLinkedNode<E> oldCurr = curr;
-    curr = curr.prev;
-    currIdx -= 1;
-
-    return oldCurr.val;
-  }
-
-  @Override
-  public int nextIndex() {
-    return currIdx + 1;
-  }
-
-  @Override
-  public int previousIndex() {
-    return currIdx - 1;
-  }
-
-  @Override
-  public void add(E elem) {
-    throw new UnsupportedOperationException(
-      "DoublyLinkedListIterator.add is not supported by this data structure.");
-  }
-
-  @Override
-  public void remove() {
-    throw new UnsupportedOperationException(
-      "DoublyLinkedListIterator.remove is not supported by this data structure.");
-  }
-
-  @Override
-  public void set(E elem) {
-    throw new UnsupportedOperationException(
-      "DoublyLinkedListIterator.set is not supported by this data structure.");
-  }
-
-}
-
 public class DoublyLinkedList<E> implements Iterable<E> {
 
-  private DoublyLinkedNode<E> head;
-  private DoublyLinkedNode<E> last;
+  static class Node<E> {
+
+    Node<E> next;
+    Node<E> prev;
+    E val;
+
+    Node(E val) {
+      this.val = val;
+    }
+
+    static <E> void makeNeighbours(Node<E> n0, Node<E> n1, Node<E> n2) {
+      if (n0 != null) {
+        n0.next = n1;
+      }
+
+      if (n2 != null) {
+        n2.prev = n1;
+      }
+
+      if (n1 != null) {
+        n1.prev = n0;
+        n1.next = n2;
+      }
+    }
+
+    static <E> void relinkNeighbours(Node<E> node) {
+      if (node.prev != null) {
+        node.prev.next = node.next;
+      }
+
+      if (node.next != null) {
+        node.next.prev = node.prev;
+      }
+    }
+
+  }
+
+  class Iterator<E> implements ListIterator<E> {
+
+    private DoublyLinkedList.Node<E> curr;
+    private int currIdx;
+
+    Iterator(DoublyLinkedList<E> collection) {
+      this.curr = collection.indexNode(0);
+      this.currIdx = 0;
+    }
+
+    Iterator(DoublyLinkedList<E> collection, int idx) {
+      this.curr = collection.indexNode(idx);
+      this.currIdx = idx;
+    }
+
+    @Override
+    public boolean hasNext() {
+      return curr != null;
+    }
+
+    @Override
+    public boolean hasPrevious() {
+      return curr != null;
+    }
+
+    @Override
+    public E next() {
+      DoublyLinkedList.Node<E> oldCurr = curr;
+      curr = curr.next;
+      currIdx += 1;
+
+      return oldCurr.val;
+    }
+
+    @Override
+    public E previous() {
+      DoublyLinkedList.Node<E> oldCurr = curr;
+      curr = curr.prev;
+      currIdx -= 1;
+
+      return oldCurr.val;
+    }
+
+    @Override
+    public int nextIndex() {
+      return currIdx + 1;
+    }
+
+    @Override
+    public int previousIndex() {
+      return currIdx - 1;
+    }
+
+    @Override
+    public void add(E elem) {
+      throw new UnsupportedOperationException(
+        "DoublyLinkedList.Iterator.add is not supported by this data structure.");
+    }
+
+    @Override
+    public void remove() {
+      throw new UnsupportedOperationException(
+        "DoublyLinkedList.Iterator.remove is not supported by this data structure.");
+    }
+
+    @Override
+    public void set(E elem) {
+      throw new UnsupportedOperationException(
+        "DoublyLinkedList.Iterator.set is not supported by this data structure.");
+    }
+
+  }
+
+  private DoublyLinkedList.Node<E> head;
+  private DoublyLinkedList.Node<E> last;
   private int len;
 
   public DoublyLinkedList() {
@@ -127,14 +127,14 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     return idx >= 0 && idx < len;
   }
 
-  protected DoublyLinkedNode<E> indexNode(int idx) throws IndexOutOfBoundsException {
+  protected DoublyLinkedList.Node<E> indexNode(int idx) throws IndexOutOfBoundsException {
     if (!validIndex(idx)) {
       throw new IndexOutOfBoundsException("Cannot index element #" + idx + " in DoublyLinkedList.");
     }
 
     if (idx < len / 2) {
 
-      DoublyLinkedNode<E> curr = head;
+      DoublyLinkedList.Node<E> curr = head;
 
       for (; idx > 0; idx--) {
         curr = curr.next;
@@ -143,7 +143,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
       return curr;
     } else {
 
-      DoublyLinkedNode<E> curr = last;
+      DoublyLinkedList.Node<E> curr = last;
 
       for (idx = len - idx - 1; idx > 0; idx--) {
         curr = curr.prev;
@@ -153,7 +153,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     }
   }
 
-  protected Option<DoublyLinkedNode<E>> safeIndexNode(int idx) {
+  protected Option<DoublyLinkedList.Node<E>> safeIndexNode(int idx) {
     return validIndex(idx)
       ? new Option<>(indexNode(idx)) // Safe to index.
       : new Option<>(); // Unsafe to index, return empty Option.
@@ -173,7 +173,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     return len;
   }
 
-  private void addNodeAfter(DoublyLinkedNode<E> node, int idx) throws IndexOutOfBoundsException {
+  private void addNodeAfter(DoublyLinkedList.Node<E> node, int idx) throws IndexOutOfBoundsException {
     if (len == 0) {
       head = node;
       last = node;
@@ -182,8 +182,8 @@ public class DoublyLinkedList<E> implements Iterable<E> {
       return;
     }
 
-    DoublyLinkedNode<E> before = indexNode(idx);
-    DoublyLinkedNode.makeNeighbours(before, node, before.next);
+    DoublyLinkedList.Node<E> before = indexNode(idx);
+    DoublyLinkedList.Node.makeNeighbours(before, node, before.next);
 
     if (idx == len - 1) {
       last = node;
@@ -192,7 +192,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     len += 1;
   }
 
-  private void addNodeBefore(DoublyLinkedNode<E> node, int idx) throws IndexOutOfBoundsException {
+  private void addNodeBefore(DoublyLinkedList.Node<E> node, int idx) throws IndexOutOfBoundsException {
     if (len == 0) {
       head = node;
       last = node;
@@ -201,8 +201,8 @@ public class DoublyLinkedList<E> implements Iterable<E> {
       return;
     }
 
-    DoublyLinkedNode<E> after = indexNode(idx);
-    DoublyLinkedNode.makeNeighbours(after.prev, node, after);
+    DoublyLinkedList.Node<E> after = indexNode(idx);
+    DoublyLinkedList.Node.makeNeighbours(after.prev, node, after);
 
     if (idx == 0) {
       head = node;
@@ -212,11 +212,11 @@ public class DoublyLinkedList<E> implements Iterable<E> {
   }
 
   public void addAfter(E val, int idx) throws IndexOutOfBoundsException {
-    addNodeAfter(new DoublyLinkedNode<>(val), idx);
+    addNodeAfter(new DoublyLinkedList.Node<>(val), idx);
   }
 
   public void addBefore(E val, int idx) throws IndexOutOfBoundsException {
-    addNodeBefore(new DoublyLinkedNode<>(val), idx);
+    addNodeBefore(new DoublyLinkedList.Node<>(val), idx);
   }
 
   public void cons(E val) {
@@ -232,7 +232,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
       throw new IndexOutOfBoundsException("Cannot remove element #" + idx + " from DoublyLinkedList.");
     }
 
-    DoublyLinkedNode<E> toRemove = indexNode(idx);
+    DoublyLinkedList.Node<E> toRemove = indexNode(idx);
 
     if (idx == 0) {
       head = toRemove.next;
@@ -240,7 +240,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
       last = toRemove.prev;
     }
 
-    DoublyLinkedNode.relinkNeighbours(toRemove);
+    DoublyLinkedList.Node.relinkNeighbours(toRemove);
     toRemove.next = null;
     toRemove.prev = null;
 
@@ -291,14 +291,14 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
   @Override
   public Iterator<E> iterator() {
-    return new DoublyLinkedListIterator<>(this);
+    return new DoublyLinkedList.Iterator<>(this);
   }
 
   @Override
   public DoublyLinkedList<E> clone() {
     DoublyLinkedList<E> listClone = new DoublyLinkedList<>();
 
-    for (DoublyLinkedNode<E> curr = head; curr != null; curr = curr.next) {
+    for (DoublyLinkedList.Node<E> curr = head; curr != null; curr = curr.next) {
       listClone.consLast(curr.val);
     }
 
@@ -308,7 +308,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
   public int indexOf(E elem) {
     int currIdx = 0;
 
-    for (DoublyLinkedNode<E> curr = head; curr != null; curr = curr.next) {
+    for (DoublyLinkedList.Node<E> curr = head; curr != null; curr = curr.next) {
       if (curr.val == elem) {
         return currIdx;
       }
@@ -331,7 +331,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
   public String toString() {
     StringBuilder readable = new StringBuilder("DoublyLinkedList { ");
 
-    for (DoublyLinkedNode<E> curr = head; curr != null; curr = curr.next) {
+    for (DoublyLinkedList.Node<E> curr = head; curr != null; curr = curr.next) {
       readable.append(curr.val);
       readable.append("; ");
     }
