@@ -49,6 +49,14 @@ public class BinaryTree<E> {
     return BinaryTree.withComparable(container.iterator());
   }
 
+  protected void setRoot(BinaryTree.Node<E> node) {
+    root = node;
+  }
+
+  protected BinaryTree.Node<E> getRoot() {
+    return root;
+  }
+
   public int numItems() {
     return len;
   }
@@ -148,7 +156,10 @@ public class BinaryTree<E> {
 
   public void breadthFirst(Consumer<E> process) {
     Queue<BinaryTree.Node<E>> queue = new Queue<>();
-    queue.enqueue(root);
+
+    if (root != null) {
+      queue.enqueue(root);
+    }
 
     while (!queue.isEmpty()) {
       BinaryTree.Node<E> curr = queue.dequeue();
