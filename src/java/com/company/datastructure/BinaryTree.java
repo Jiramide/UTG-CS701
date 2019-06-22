@@ -4,21 +4,21 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-class BinaryTreeNode<E> {
-
-  E val;
-  BinaryTreeNode<E> left;
-  BinaryTreeNode<E> right;
-
-  BinaryTreeNode(E val) {
-    this.val = val;
-  }
-
-}
-
 public class BinaryTree<E> {
 
-  private BinaryTreeNode<E> root;
+  static class Node<E> {
+
+    E val;
+    Node<E> left;
+    Node<E> right;
+
+    Node(E val) {
+      this.val = val;
+    }
+
+  }
+
+  private BinaryTree.Node<E> root;
   private Comparator<? super E> comp;
   private int len;
 
@@ -55,7 +55,7 @@ public class BinaryTree<E> {
     return len == 0;
   }
 
-  private int height(BinaryTreeNode<E> node) {
+  private int height(BinaryTree.Node<E> node) {
     if (node == null) {
       return -1;
     }
@@ -67,7 +67,7 @@ public class BinaryTree<E> {
     return height(root);
   }
 
-  private int minHeight(BinaryTreeNode<E> node) {
+  private int minHeight(BinaryTree.Node<E> node) {
     if (node == null) {
       return -1;
     }
@@ -88,7 +88,7 @@ public class BinaryTree<E> {
   // out-order: RNL
   // postorder: LRN
 
-  private void preOrder(BinaryTreeNode<E> curr, Consumer<E> process) {
+  private void preOrder(BinaryTree.Node<E> curr, Consumer<E> process) {
     if (curr == null) {
       return;
     }
@@ -102,7 +102,7 @@ public class BinaryTree<E> {
     preOrder(root, process);
   }
 
-  private void inOrder(BinaryTreeNode<E> curr, Consumer<E> process) {
+  private void inOrder(BinaryTree.Node<E> curr, Consumer<E> process) {
     if (curr == null) {
       return;
     }
@@ -116,7 +116,7 @@ public class BinaryTree<E> {
     inOrder(root, process);
   }
 
-  private void outOrder(BinaryTreeNode<E> curr, Consumer<E> process) {
+  private void outOrder(BinaryTree.Node<E> curr, Consumer<E> process) {
     if (curr == null) {
       return;
     }
@@ -130,7 +130,7 @@ public class BinaryTree<E> {
     outOrder(root, process);
   }
 
-  private void postOrder(BinaryTreeNode<E> curr, Consumer<E> process) {
+  private void postOrder(BinaryTree.Node<E> curr, Consumer<E> process) {
     if (curr == null) {
       return;
     }
@@ -145,11 +145,11 @@ public class BinaryTree<E> {
   }
 
   public void breadthFirst(Consumer<E> process) {
-    Queue<BinaryTreeNode<E>> queue = new Queue<>();
+    Queue<BinaryTree.Node<E>> queue = new Queue<>();
     queue.enqueue(root);
 
     while (!queue.isEmpty()) {
-      BinaryTreeNode<E> curr = queue.dequeue();
+      BinaryTree.Node<E> curr = queue.dequeue();
       process.accept(curr.val);
 
       if (curr.left != null) {
@@ -165,8 +165,8 @@ public class BinaryTree<E> {
   public void insert(E val) {
     len += 1;
 
-    BinaryTreeNode<E> curr = root;
-    BinaryTreeNode<E> prev = null;
+    BinaryTree.Node<E> curr = root;
+    BinaryTree.Node<E> prev = null;
 
     while (curr != null) {
       prev = curr;
@@ -176,16 +176,16 @@ public class BinaryTree<E> {
     }
 
     if (prev == null) {
-      root = new BinaryTreeNode<>(val);
+      root = new BinaryTree.Node<>(val);
     } else if (comp.compare(val, prev.val) < 0) {
-      prev.left = new BinaryTreeNode<>(val);
+      prev.left = new BinaryTree.Node<>(val);
     } else {
-      prev.right = new BinaryTreeNode<>(val);
+      prev.right = new BinaryTree.Node<>(val);
     }
   }
 
   public boolean member(E val) {
-    BinaryTreeNode<E> curr = root;
+    BinaryTree.Node<E> curr = root;
 
     while (curr != null) {
       int compRes = comp.compare(val, curr.val);
