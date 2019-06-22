@@ -235,6 +235,36 @@ public class Main {
     System.out.println("Unbalanced binaryTree height: " + tree2.height());
     System.out.println("Unbalanced binaryTree minHeight: " + tree2.minHeight());
 
+    RedBlackTree<Integer> rbTree = RedBlackTree.withComparable();
+
+    for (Integer curr = 0; curr <= 10; curr++) {
+      rbTree.insert(curr);
+    }
+
+    System.out.println("Preorder");
+    rbTree.preOrder(Main::printElem);
+    System.out.println("");
+
+    System.out.println("In-order");
+    rbTree.inOrder(Main::printElem);
+    System.out.println("");
+
+    System.out.println("Out-order");
+    rbTree.outOrder(Main::printElem);
+    System.out.println("");
+
+    System.out.println("Postorder");
+    rbTree.postOrder(Main::printElem);
+    System.out.println("");
+
+    System.out.println("Breadth first");
+    rbTree.breadthFirst(Main::printElem);
+    System.out.println("");
+
+    System.out.println("RedBlackTree len: " + rbTree.numItems());
+    System.out.println("RedBlackTree height: " + rbTree.height());
+    System.out.println("RedBlackTree minHeight: " + rbTree.minHeight());
+
     System.out.println("StackArr");
     Integer[] stackContainer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     StackArr<Integer> stack = new StackArr<>(stackContainer);
