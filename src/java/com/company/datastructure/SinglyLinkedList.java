@@ -2,40 +2,6 @@ package com.company.datastructure;
 
 import java.util.Iterator;
 
-class SinglyLinkedNode<E> {
-
-  SinglyLinkedNode<E> next;
-  E val;
-
-  SinglyLinkedNode(E val) {
-    this.val = val;
-  }
-
-}
-
-class SinglyLinkedListIterator<E> implements Iterator<E> {
-
-  private SinglyLinkedNode<E> curr;
-
-  SinglyLinkedListIterator(SinglyLinkedList<E> collection) {
-    this.curr = collection.indexNode(0);
-  }
-
-  @Override
-  public boolean hasNext() {
-    return curr != null;
-  }
-
-  @Override
-  public E next() {
-    SinglyLinkedNode<E> oldCurr = curr;
-    curr = curr.next;
-
-    return oldCurr.val;
-  }
-
-}
-
 /**
  * <p>
  * A SinglyLinkedList is a collection of nodes, each which have two fields: a
@@ -60,7 +26,41 @@ class SinglyLinkedListIterator<E> implements Iterator<E> {
  */
 public class SinglyLinkedList<E> implements Iterable<E> {
 
-  private SinglyLinkedNode<E> head;
+  static class Node<E> {
+
+    Node<E> next;
+    E val;
+
+    Node(E val) {
+      this.val = val;
+    }
+
+  }
+
+  static class Iterator<E> implements Iterator<E> {
+
+    private SinglyLinkedList.Node<E> curr;
+
+    Iterator(SinglyLinkedList<E> collection) {
+      this.curr = collection.indexNode(0);
+    }
+
+    @Override
+    public boolean hasNext() {
+      return curr != null;
+    }
+
+    @Override
+    public E next() {
+      SinglyLinked.Node<E> oldCurr = curr;
+      curr = curr.next;
+
+      return oldCurr.val;
+    }
+
+  }
+
+  private SinglyLinkedList.Node<E> head;
   private int len;
 
   /**
@@ -86,12 +86,12 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @throws IndexOutOfBoundsException If idx is not a valid index.
    * @see SinglyLinkedList.safeIndexNode
    */
-  protected SinglyLinkedNode<E> indexNode(int idx) throws IndexOutOfBoundsException {
+  protected SinglyLinkedList.Node<E> indexNode(int idx) throws IndexOutOfBoundsException {
     if (!validIndex(idx)) {
       throw new IndexOutOfBoundsException("Cannot index element #" + idx + " in SinglyLinkedList.");
     }
 
-    SinglyLinkedNode<E> curr = head;
+    SinglyLinkedList.Node<E> curr = head;
 
     for (; idx > 0; idx--) {
       curr = curr.next;
@@ -106,7 +106,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @return The node located at the index specified.
    * @see SinglyLinkedList.indexNode
    */
-  protected Option<SinglyLinkedNode<E>> safeIndexNode(int idx) {
+  protected Option<SinglyLinkedList.Node<E>> safeIndexNode(int idx) {
     return validIndex(idx)
       ? new Option<>(indexNode(idx)) // Safe to index.
       : new Option<>(); // Unsafe to index, return empty Option.
@@ -151,7 +151,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @throws IndexOutOfBoundsException If idx is not a valid index.
    * @see SinglyLinkedList.addNodeAfter
    */
-  private void addNodeBefore(SinglyLinkedNode<E> node, int idx) throws IndexOutOfBoundsException {
+  private void addNodeBefore(SinglyLinkedList.Node<E> node, int idx) throws IndexOutOfBoundsException {
     if (idx == 0) {
       node.next = head;
       head = node;
@@ -171,8 +171,8 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @throws IndexOutOfBoundsException If idx is not a valid index.
    * @see SinglyLinkedList.addNodeBefore
    */
-  private void addNodeAfter(SinglyLinkedNode<E> node, int idx) throws IndexOutOfBoundsException {
-    SinglyLinkedNode<E> before = indexNode(idx);
+  private void addNodeAfter(SinglyLinkedList.Node<E> node, int idx) throws IndexOutOfBoundsException {
+    SinglyLinkedList.Node<E> before = indexNode(idx);
 
     node.next = before.next;
     before.next = node;
@@ -188,7 +188,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @see SinglyLinkedList.addAfter
    */
   public void addBefore(E val, int idx) throws IndexOutOfBoundsException {
-    addNodeBefore(new SinglyLinkedNode<>(val), idx);
+    addNodeBefore(new SinglyLinkedList.Node<>(val), idx);
   }
 
   /**
@@ -199,7 +199,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
    * @see SinglyLinkedList.addBefore
    */
   public void addAfter(E val, int idx) throws IndexOutOfBoundsException {
-    addNodeAfter(new SinglyLinkedNode<>(val), idx);
+    addNodeAfter(new SinglyLinkedList.Node<>(val), idx);
   }
 
   /**
@@ -227,7 +227,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     }
 
     if (idx == 0) {
-      SinglyLinkedNode<E> oldHead = head;
+      SinglyLinkedList.Node<E> oldHead = head;
       head = head.next;
       oldHead.next = null;
 
@@ -235,8 +235,8 @@ public class SinglyLinkedList<E> implements Iterable<E> {
       return oldHead.val;
     }
 
-    SinglyLinkedNode<E> before = indexNode(idx - 1);
-    SinglyLinkedNode<E> toRemove = before.next;
+    SinglyLinkedList.Node<E> before = indexNode(idx - 1);
+    SinglyLinkedList.Node<E> toRemove = before.next;
 
     before.next = toRemove.next;
     toRemove.next = null;
@@ -313,12 +313,12 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     }
 
     SinglyLinkedList<E> listClone = new SinglyLinkedList<>();
-    SinglyLinkedNode<E> listLast = new SinglyLinkedNode<>(head.val);
+    SinglyLinkedList.Node<E> listLast = new SinglyLinkedList.Node<>(head.val);
 
     listClone.head = listLast;
 
-    for (SinglyLinkedNode<E> curr = head.next; curr != null; curr = curr.next) {
-      listLast.next = new SinglyLinkedNode<>(curr.val);
+    for (SinglyLinkedList.Node<E> curr = head.next; curr != null; curr = curr.next) {
+      listLast.next = new SinglyLinkedList.Node<>(curr.val);
       listLast = listLast.next;
     }
 
@@ -337,7 +337,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   public int indexOf(E elem) {
     int currIdx = 0;
 
-    for (SinglyLinkedNode<E> curr = head; curr != null; curr = curr.next) {
+    for (SinglyLinkedList.Node<E> curr = head; curr != null; curr = curr.next) {
       if (curr.val.equals(elem)) {
         return currIdx;
       }
@@ -370,7 +370,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
   public String toString() {
     StringBuilder readable = new StringBuilder("SinglyLinkedList { ");
 
-    for (SinglyLinkedNode<E> curr = head; curr != null; curr = curr.next) {
+    for (SinglyLinkedList.Node<E> curr = head; curr != null; curr = curr.next) {
       readable.append(curr.val);
       readable.append("; ");
     }
