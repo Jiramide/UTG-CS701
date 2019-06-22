@@ -2,85 +2,85 @@ package com.company.datastructure;
 
 import java.util.Comparator;
 
-class HeapNode<E> {
-
-  E val;
-  HeapNode<E> parent;
-  HeapNode<E> left;
-  HeapNode<E> right;
-
-  HeapNode(E val) {
-    this.val = val;
-    this.parent = null;
-    this.left = null;
-    this.right = null;
-  }
-
-  static <E> void setAsLeft(HeapNode<E> parent, HeapNode<E> left) {
-    parent.left = left;
-    left.parent = parent;
-  }
-
-  static <E> void setAsRight(HeapNode<E> parent, HeapNode<E> right) {
-    parent.right = right;
-    right.parent = parent;
-  }
-
-  static <E> void swap(HeapNode<E> node0, HeapNode<E> node1) {
-    E temp = node0.val;
-    node0.val = node1.val;
-    node1.val = temp;
-  }
-
-  static <E> void removeChild(HeapNode<E> parent, HeapNode<E> child) {
-    if (parent.left == child) {
-      parent.left = null;
-    }
-
-    if (parent.right == child) {
-      parent.right = null;
-    }
-  }
-
-}
-
 public class Heap<E> {
+
+  static class Node<E> {
+
+    E val;
+    Node<E> parent;
+    Node<E> left;
+    Node<E> right;
+
+    Node(E val) {
+      this.val = val;
+      this.parent = null;
+      this.left = null;
+      this.right = null;
+    }
+
+    static <E> void setAsLeft(Node<E> parent, Node<E> left) {
+      parent.left = left;
+      left.parent = parent;
+    }
+
+    static <E> void setAsRight(Node<E> parent, Node<E> right) {
+      parent.right = right;
+      right.parent = parent;
+    }
+
+    static <E> void swap(Node<E> node0, Node<E> node1) {
+      E temp = node0.val;
+      node0.val = node1.val;
+      node1.val = temp;
+    }
+
+    static <E> void removeChild(Node<E> parent, Node<E> child) {
+      if (parent.left == child) {
+        parent.left = null;
+      }
+
+      if (parent.right == child) {
+        parent.right = null;
+      }
+    }
+
+  }
 
   private Comparator<? super E> comp;
   private int len;
-  private HeapNode<E> root;
+  private Heap.Node<E> root;
 
   public Heap(E[] container) {
     QueueArr<E> values = new QueueArr<>(container);
-    HeapNode<E> root = new HeapNode<>(values.dequeue());
+    Heap.Node<E> root = new Heap.Node<>(values.dequeue());
 
     @SuppressWarnings("unchecked")
-    QueueArr<HeapNode<E>> nodes = new QueueArr<>((Class<HeapNode<E>>)root.getClass(), container.length);
+    QueueArr<Heap.Node<E>> nodes = new QueueArr<>((Class<Heap.Node<E>>)root.getClass(), container.length);
     nodes.enqueue(root);
 
     while (values.numItems() > 1) {
-      HeapNode<E> parent = nodes.dequeue();
-      HeapNode<E> left = new HeapNode<>(values.dequeue());
-      HeapNode<E> right = new HeapNode<>(values.dequeue());
+      Heap.Node<E> parent = nodes.dequeue();
+      Heap.Node<E> left = new Heap.Node<>(values.dequeue());
+      Heap.Node<E> right = new Heap.Node<>(values.dequeue());
 
-      HeapNode.setAsLeft(parent, left);
-      HeapNode.setAsRight(parent, right);
+      Heap.Node.setAsLeft(parent, left);
+      Heap.Node.setAsRight(parent, right);
 
       nodes.enqueue(left);
       nodes.enqueue(right);
     }
 
     if (!values.isEmpty()) {
-      HeapNode.setAsLeft(
+      Heap.Node.setAsLeft(
         nodes.dequeue(),
-        new HeapNode<>(values.dequeue())
+        new Heap.Node<>(values.dequeue())
       );
     }
 
     heapify(root);
   }
 
-  private void heapify(HeapNode<E> node) {
+  private void heapify(Heap.Node<E> node) {
     if (node == null) {
       return;
     }
@@ -90,17 +90,17 @@ public class Heap<E> {
     siftDown(node);
   }
 
-  private void siftUp(HeapNode<E> node) {
-    HeapNode<E> parent = node.parent;
+  private void siftUp(Heap.Node<E> node) {
+    Heap.Node<E> parent = node.parent;
 
     while (parent != null && comp.compare(node.val, parent.val) > 0) {
-      HeapNode.swap(node, parent);
+      Heap.Node.swap(node, parent);
       node = parent;
       parent = node.parent;
     }
   }
 
-  private HeapNode<E> getBetterChild(HeapNode<E> parent) {
+  private Heap.Node<E> getBetterChild(Heap.Node<E> parent) {
     if (parent.right == null) {
       return parent.left;
     }
@@ -110,11 +110,11 @@ public class Heap<E> {
       : parent.right;
   }
 
-  private void siftDown(HeapNode<E> node) {
-    HeapNode<E> betterChild = getBetterChild(node);
+  private void siftDown(Heap.Node<E> node) {
+    Heap.Node<E> betterChild = getBetterChild(node);
 
     while (betterChild != null && comp.compare(betterChild.val, node.val) > 0) {
-      HeapNode.swap(node, betterChild);
+      Heap.Node.swap(node, betterChild);
       node = betterChild;
       betterChild = getBetterChild(node);
     }
@@ -131,16 +131,16 @@ public class Heap<E> {
   public E pop() {
     E toPop = root.val;
 
-    HeapNode<E> node = root;
-    HeapNode<E> betterChild = getBetterChild(node);
+    Heap.Node<E> node = root;
+    Heap.Node<E> betterChild = getBetterChild(node);
 
     while (betterChild != null) {
-      HeapNode.swap(node, betterChild);
+      Heap.Node.swap(node, betterChild);
       node = betterChild;
       betterChild = getBetterChild(node);
     }
 
-    HeapNode.removeChild(node.parent, node);
+    Heap.Node.removeChild(node.parent, node);
     return toPop;
   }
 
