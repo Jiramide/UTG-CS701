@@ -37,11 +37,11 @@ public class SinglyLinkedList<E> implements Iterable<E> {
 
   }
 
-  static class Iterator<E> implements Iterator<E> {
+  static class SinglyLinkedIterator<E> implements Iterator<E> {
 
     private SinglyLinkedList.Node<E> curr;
 
-    Iterator(SinglyLinkedList<E> collection) {
+    SinglyLinkedIterator(SinglyLinkedList<E> collection) {
       this.curr = collection.indexNode(0);
     }
 
@@ -52,7 +52,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
 
     @Override
     public E next() {
-      SinglyLinked.Node<E> oldCurr = curr;
+      SinglyLinkedList.Node<E> oldCurr = curr;
       curr = curr.next;
 
       return oldCurr.val;
@@ -303,7 +303,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
 
   @Override
   public Iterator<E> iterator() {
-    return new SinglyLinkedListIterator<E>(this);
+    return new SinglyLinkedList.SinglyLinkedIterator<E>(this);
   }
 
   @Override

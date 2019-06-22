@@ -23,7 +23,9 @@ public class BinaryTree<E> {
   private int len;
 
   public BinaryTree(Comparator<? super E> comp) {
+    this.root = null;
     this.comp = comp;
+    this.len = 0;
   }
 
   public BinaryTree(Iterator<? extends E> iter, Comparator<? super E> comp) {

@@ -42,17 +42,17 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
   }
 
-  class Iterator<E> implements ListIterator<E> {
+  static class DoublyLinkedIterator<E> implements ListIterator<E> {
 
     private DoublyLinkedList.Node<E> curr;
     private int currIdx;
 
-    Iterator(DoublyLinkedList<E> collection) {
+    DoublyLinkedIterator(DoublyLinkedList<E> collection) {
       this.curr = collection.indexNode(0);
       this.currIdx = 0;
     }
 
-    Iterator(DoublyLinkedList<E> collection, int idx) {
+    DoublyLinkedIterator(DoublyLinkedList<E> collection, int idx) {
       this.curr = collection.indexNode(idx);
       this.currIdx = idx;
     }
@@ -98,19 +98,19 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     @Override
     public void add(E elem) {
       throw new UnsupportedOperationException(
-        "DoublyLinkedList.Iterator.add is not supported by this data structure.");
+        "DoublyLinkedList.DoublyLinkedIterator.add is not supported by this data structure.");
     }
 
     @Override
     public void remove() {
       throw new UnsupportedOperationException(
-        "DoublyLinkedList.Iterator.remove is not supported by this data structure.");
+        "DoublyLinkedList.DoublyLinkedIterator.remove is not supported by this data structure.");
     }
 
     @Override
     public void set(E elem) {
       throw new UnsupportedOperationException(
-        "DoublyLinkedList.Iterator.set is not supported by this data structure.");
+        "DoublyLinkedList.DoublyLinkedIterator.set is not supported by this data structure.");
     }
 
   }
@@ -291,7 +291,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
   @Override
   public Iterator<E> iterator() {
-    return new DoublyLinkedList.Iterator<>(this);
+    return new DoublyLinkedList.DoublyLinkedIterator<>(this);
   }
 
   @Override
