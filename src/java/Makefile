@@ -23,6 +23,7 @@ CLASSES := \
 	pkg/datastructure/Option.class \
 	pkg/datastructure/Queue.class \
 	pkg/datastructure/QueueArr.class \
+	pkg/datastructure/RedBlackTree.class \
 	pkg/datastructure/Result.class \
 	pkg/datastructure/SinglyLinkedList.class \
 	pkg/datastructure/Stack.class \
