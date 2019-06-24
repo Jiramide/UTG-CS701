@@ -98,6 +98,8 @@ public class RedBlackTree<E> extends BinaryTree<E> {
         } else {
           oldParent.setRightChild(oldRight);
         }
+      } else {
+        oldRight.parent = null;
       }
     }
 
@@ -115,6 +117,8 @@ public class RedBlackTree<E> extends BinaryTree<E> {
         } else {
           oldParent.setRightChild(oldLeft);
         }
+      } else {
+        oldLeft.parent = null;
       }
     }
 
@@ -174,13 +178,7 @@ public class RedBlackTree<E> extends BinaryTree<E> {
       prev.setRightChild(newNode);
     }
 
-    System.out.print(val.toString() + ": ");
-    breadthFirst(x -> {
-      System.out.print(" ");
-      System.out.print(x.toString());
-    });
     repair(newNode);
-    System.out.println("");
   }
 
   private boolean continueRepair(RedBlackTree.Node<E> node) {
@@ -190,6 +188,7 @@ public class RedBlackTree<E> extends BinaryTree<E> {
 
   private void repair(RedBlackTree.Node<E> node) {
     Node<E> uncle = node.getUncle();
+
     while (Node.getCol(uncle) == RedBlackTree.Colour.RED
       && continueRepair(node)) {
       uncle.col = RedBlackTree.Colour.BLACK;
@@ -199,6 +198,7 @@ public class RedBlackTree<E> extends BinaryTree<E> {
       grandparent.col = RedBlackTree.Colour.RED;
 
       node = grandparent;
+      uncle = node.getUncle();
     }
 
     // uncle.col == BLACK => uncle.col == BLACK || uncle == null
@@ -211,6 +211,7 @@ public class RedBlackTree<E> extends BinaryTree<E> {
         if (node == parent.getRight()) {
           // left right
           parent.leftRotate();
+          parent = node;
         }
 
         grandparent.rightRotate();
@@ -218,14 +219,14 @@ public class RedBlackTree<E> extends BinaryTree<E> {
         if (node == parent.getLeft()) {
           // right left
           parent.rightRotate();
+          parent = node;
         }
 
         grandparent.leftRotate();
       }
 
-      RedBlackTree.Colour gCol = grandparent.col;
-      grandparent.col = parent.col;
-      parent.col = gCol;
+      grandparent.col = RedBlackTree.Colour.RED;
+      parent.col = RedBlackTree.Colour.BLACK;
 
       if (getRoot() == grandparent) {
         setRoot(parent);
