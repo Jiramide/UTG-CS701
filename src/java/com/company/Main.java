@@ -3,6 +3,7 @@ package com.company;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.function.Consumer;
 import com.company.datastructure.*;
 import com.company.algo.*;
 
@@ -237,7 +238,7 @@ public class Main {
 
     RedBlackTree<Integer> rbTree = RedBlackTree.withComparable();
 
-    for (Integer curr = 0; curr <= 10; curr++) {
+    for (Integer curr = 0; curr <= 20; curr++) {
       rbTree.insert(curr);
     }
 
